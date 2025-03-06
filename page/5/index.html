@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>mygr main()</title><meta name="author" content="my9r"><meta name="copyright" content="my9r"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Just the owner of this blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="mygr main()">
+<meta property="og:url" content="http://example.com/page/5/index.html">
+<meta property="og:site_name" content="mygr main()">
+<meta property="og:description" content="Just the owner of this blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/avatar.jpg">
+<meta property="article:author" content="my9r">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/5/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'mygr main()',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background: black;"></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(img/welcome-cover.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">mygr main()</span></a></span><div id="menus"></div></nav><div id="site-info"><h1 id="site-title">mygr main()</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/06/%E9%A2%98%E8%A7%A3/P7907%20Ynoi2005%20rmscne%20%E9%A2%98%E8%A7%A3/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-06T08:16:21.011Z" title="发表于 2025-03-06 16:16:21">2025-03-06</time></span></div><div class="content">很妙的思路转换 显然扫描线，一个很自然的想法是用数据结构维护 $f_i$ 表示左端点为 $i$ 时…的答案，然后单点查询，但是我们发现当 $l$ 不同时，其对应的答案其实也是不好维护的 考虑这么转换，假设查询区间为 $[l,r]$ ，其内部有一个子区间 $[l’,r’]$ ，那么合法的 $l’$ 一定是 $[l,r]$ 的一段前缀，发现通过这么转化可以成功的将单点查询转化为区间查询 这样有什么好处呢？首先我们可以二分得到这个前缀的具体区间，接下来对于这个前缀内的每个 $l’$ 一定能够找到一个对应的 $r’$ 使得其合法，所以说即使对于不同的 $l$ ，只要其被包含在前缀区间内，那么他的答案都是相同的，记其为 $f_i$ ，那么我们最后要求的其实就是 $$\min_{p \in [l_e,r_e]}f_{p}-p+1$$然后我们发现当我们对应的 $r \leftarrow r+1$ 时，我们只需要更新 $i \in [las_{a_r},r]$ 的 $f_{i}\leftarrow r$ 即可  然后就做完了 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/06/%E9%A2%98%E8%A7%A3/P7486%20%E3%80%8CStoi2031%E3%80%8D%E5%BD%A9%E8%99%B9%20%E9%A2%98%E8%A7%A3/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-06T08:16:21.006Z" title="发表于 2025-03-06 16:16:21">2025-03-06</time></span></div><div class="content">没啥好说的，暴解 $$\begin{eqnarray}&amp;&amp; \prod_{i&#x3D;l}^{r}\prod_{j&#x3D;l}^{r} \frac{ij}{gcd(i,j)}^{\frac{ij}{gcd(i,j)}} \\end{eqnarray}$$设 $f(x,y)&#x3D;\prod_{i&#x3D;1}^{x}\prod_{j&#x3D;1}^{y} \frac{ij}{gcd(i,j)}^{\frac{ij}{gcd(i,j)}}$ 那么答案则为 $$\frac{f(r,r)f(l-1,l-1)}{f(l-1,r)f(r,l-1)}$$ $$\begin{eqnarray} f(x,y)&amp;&#x3D;&amp;\prod_{i&#x3D;1}^{x}\prod_{j&#x3D;1}^{y} \frac{ij}{gcd(i,j)}^{\frac{ij}{gcd(i,j)}}\&amp;&#x3D;&amp;\prod_{d&#x3D;1}^{y}\prod_{i&#x3D;1}^{x}\prod_{j&#x3D;1}^{y}...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/06/%E9%A2%98%E8%A7%A3/P4694%20PA%202013%20Raper/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-06T08:16:21.003Z" title="发表于 2025-03-06 16:16:21">2025-03-06</time></span></div><div class="content">考虑将每次的决策分为两部分：从左往右的以及从右往左的 额外记录一个 $f_i,g_i$ 表示 $a_i,b_i$ 是否被选择 对于从左往右的，直接线段树上分治即可 对于从右往左的，我们考虑记录一个 $h_i$ 表示 $i+1$ 到 $i$ 的反向边的流量 考虑记录区间前缀的最大联通 $b_i$ ，区间后缀的最大联通 $a_i$ ，区间内最大的从右到左段的大小，区间从右往左方案中的最大值 因为区间内 $h_i$ 非负，所以只需要记录区间内 $Min$ 为 $0$ 以及 $Min$ 非 $0$ 的情况即可 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/06/%E9%A2%98%E8%A7%A3/AT_cf17_final_j%20Tree%20MST%20%E9%A2%98%E8%A7%A3/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-06T08:16:20.997Z" title="发表于 2025-03-06 16:16:20">2025-03-06</time></span></div><div class="content">考虑使用 b 算法解决 问题就变成了：对于一个集合 $S$ ，我如何去寻找一个点 $p$ 使得  $$\min_{s \in S}w_{p}+w_{s}+dis_{p,s} \le \min_{s\in S,j\not \in S \wedge j \not &#x3D; p}w_{s}+w_{j}+dis_{s,j}$$我们称每个节点所属的集合为他的颜色 考虑启发式合并，对树上每一个点 $u$ 用一个 $set$  维护子树内每种颜色的点的 $dis_{u,p}+w_{p}$ 的最小值，额外维护所有颜色中的最小值和次小值，启发式合并的同时统计每种颜色的答案即可 发现其实不用启发式合并，用类似树形dp的方式上下 dfs 即可 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/06/%E9%A2%98%E8%A7%A3/AT_awtf2024_d%20Almost%20Bubble%20Sort%20%E9%A2%98%E8%A7%A3/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-06T08:16:20.988Z" title="发表于 2025-03-06 16:16:20">2025-03-06</time></span></div><div class="content">考虑这么证明： 将所有点绘制到一个坐标系上，若一个点被选择了，则我们称其为 $1$  结论：当我们有 $i &lt; j,p_{i} &gt; p_{j}$ 且 $i$ 被选择，则 $j$ 一定被选择 我们考虑这么证明：若 $j$ 被选择，则一定能够构造出一种新的方案使得其比当前方案更优 使用反证法，不妨设当前是最优答案且答案中存在两位置 $i,j$ 使得 $i&lt;j,p_i&gt;p_j$ 且 $i$ 选 $j$ 不选 不妨找到其中使得 $p_j-p_i$ 最小的 $i,j$ ，那么他就会满足  $p_i,p_j$ 中间没有比 $p_i$ 小且被选择的点 $p_i,p_j$ 中间没有比 $p_j$ 大且未被选择的点 没有值在 $i，j$ 中间的元素  发现这样就将整个平面分割为了九个部分，我们分别将其称为 $$\begin{array}{a|a|a|a}\hline 1 &amp; 2 &amp; 3 \\hline 4 &amp; 5 &amp; 6 \\hline 7 &amp; 8 &amp; 9 \\hline\end{array}$$考虑让 $i,j$...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/06/%E7%AE%97%E6%B3%95/%E7%BD%91%E7%BB%9C%E6%B5%81/%E7%BD%91%E7%BB%9C%E6%B5%81/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-06T08:16:20.741Z" title="发表于 2025-03-06 16:16:20">2025-03-06</time></span></div><div class="content">[[模拟费用流]]：Trick$$最大流 \Rightarrow 平面图最小割 \Rightarrow 对偶图最短路$$$$二分图最小路径覆盖 \Rightarrow 最大独立集 \Rightarrow N-最大匹配$$ 对于代价随着时间的变化而增长，满足条件后停止增长的问题，可以考虑把每一时刻的代价表示为每一时刻未满足条件的代价的和 修缮长城 ，或是将每一段的代价乘上未来累计所需的时间 修车 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/06/%E7%AE%97%E6%B3%95/%E5%88%86%E5%9D%97/%E5%88%86%E5%9D%97/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-06T08:16:18.049Z" title="发表于 2025-03-06 16:16:18">2025-03-06</time></span></div><div class="content">经典PPT 模板区间加+区间查询值域区间数的个数，可以分块 由乃打扑克 分块也可以用来进行类似于倍增的处理，可以用来跑类似于 LCA 一类的算法 # Yuezheng Ling and Dynamic Tree </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/06/%E7%AE%97%E6%B3%95/%E9%9D%9E%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0%E9%85%8D%E5%AF%B9%E9%97%AE%E9%A2%98/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-06T08:16:17.968Z" title="发表于 2025-03-06 16:16:17">2025-03-06</time></span></div><div class="content"># LOG 判断方法：将所有元素对当前值取min，判断和是否大于当前值乘配对数即可 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/06/%E7%AE%97%E6%B3%95/%E9%9A%8F%E6%9C%BA%E5%8C%96/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-06T08:16:17.964Z" title="发表于 2025-03-06 16:16:17">2025-03-06</time></span></div><div class="content">任意取出树上的一条路径，有大于 $\frac{1}{2}$ 的概率经过树的重心，可以通过此乱搞 # 在路上 当只需要提取出一个序列的中位数&#x2F;kth元素时，可以考虑像 nth_element 一样随机一个节点，然后分治，时间复杂度是期望 $O(n)$ 的 # 在路上 当图上问题转化为二分图问题更好解决时，可以考虑将图随机染色 # Tourism ，# 「2020-2021 集训队作业」Storm </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/06/%E7%AE%97%E6%B3%95/%E9%97%B5%E5%8F%AF%E5%A4%AB%E6%96%AF%E5%9F%BA%E5%92%8C/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-06T08:16:17.960Z" title="发表于 2025-03-06 16:16:17">2025-03-06</time></span></div><div class="content">考虑对于两个几何图形 $A,B$ ，那么他们的闵可夫斯基和即为 $$C&#x3D;\bigcup_{a\in A,b\in B}a+b$$考虑他的数学意义： $(A_x+B_x,A_y+B_y)$ ，可以利用其来做一些跟凸性相关的东西 例如当我们需要在两个二元组集合 $A,B$ 中分别选出一个元素，使得 $(a_x+b_x)(a_y+b_y)$ 最小时，我们可以这么考虑 将集合内每个点转换到坐标轴上，并对 $A,B$ 求出闵可夫斯基和，最后面的答案一定是下凸包上的点 由于只需要求下凸包，所以对 $A,B$ 分别求出下凸包，再跑闵可夫斯基凸包和就可以了 可能还有许多性质，但本质都在于将二元组的加和再乘积转化为凸包上问题 放到本质上来说，我们对于函数 $f_{i}&#x3D;\max_{j}{g_j + h_{i-j} }$ (max+卷积)，若有 $g_{i},h_{i}$ 都为凸函数，则最终的 $f_i$ 为 $g_i,h_i$ 的闵可夫斯基凸包和 </div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/4/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#content-inner">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#content-inner">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/#content-inner">16</a><a class="extend next" rel="next" href="/page/6/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">my9r</div><div class="author-info-description">Just the owner of this blog</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">156</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/06/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%94%9F%E7%89%A9/%E8%83%9A%E8%83%8E%E5%B7%A5%E7%A8%8B/" title="无标题">无标题</a><time datetime="2025-03-06T08:16:21.491Z" title="发表于 2025-03-06 16:16:21">2025-03-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/06/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%94%9F%E7%89%A9/%E7%BB%86%E8%83%9E%E5%B7%A5%E7%A8%8B/" title="无标题">无标题</a><time datetime="2025-03-06T08:16:21.474Z" title="发表于 2025-03-06 16:16:21">2025-03-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/06/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%94%9F%E7%89%A9/%E7%94%9F%E7%89%A9/" title="无标题">无标题</a><time datetime="2025-03-06T08:16:21.470Z" title="发表于 2025-03-06 16:16:21">2025-03-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/06/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%94%9F%E7%89%A9/%E6%A4%8D%E7%89%A9%E7%BB%86%E8%83%9E%E5%B7%A5%E7%A8%8B/" title="无标题">无标题</a><time datetime="2025-03-06T08:16:21.467Z" title="发表于 2025-03-06 16:16:21">2025-03-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/06/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%94%9F%E7%89%A9/%E6%A0%B8%E7%B3%96%EF%BC%9F%E6%A0%B8%E8%8B%B7%EF%BC%9F%E6%A0%B8%E7%B3%96%E6%A0%B8%E8%8B%B7%EF%BC%9F/" title="无标题">无标题</a><time datetime="2025-03-06T08:16:21.463Z" title="发表于 2025-03-06 16:16:21">2025-03-06</time></div></div></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/03/">
+            <span class="card-archive-list-date">
+              三月 2025
+            </span>
+            <span class="card-archive-list-count">156</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">156</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-03-06T09:21:04.483Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(img/footer_img.png);"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By my9r</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>mygr main()</title><meta name="author" content="my9r"><meta name="copyright" content="my9r"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Just the owner of this blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="mygr main()">
+<meta property="og:url" content="http://example.com/page/10/index.html">
+<meta property="og:site_name" content="mygr main()">
+<meta property="og:description" content="Just the owner of this blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/avatar.jpg">
+<meta property="article:author" content="my9r">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/page/10/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'mygr main()',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background: black;"></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(img/welcome-cover.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">mygr main()</span></a></span><div id="menus"></div></nav><div id="site-info"><h1 id="site-title">mygr main()</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/06/%E7%AE%97%E6%B3%95/%E5%B9%B3%E8%A1%A1%E6%A0%91/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-06T08:16:17.595Z" title="发表于 2025-03-06 16:16:17">2025-03-06</time></span></div><div class="content">[[函数复合问题]]：</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/06/%E7%AE%97%E6%B3%95/%E5%B7%AE%E5%88%86%E7%BA%A6%E6%9D%9F/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-06T08:16:17.591Z" title="发表于 2025-03-06 16:16:17">2025-03-06</time></span></div><div class="content">不常考的算法，但得会 本质是通过最短路的思路求解出一个 $n$ 元一次方程组的解 # 矩阵游戏 # 糖果 Trick当差分约束中所有边都为等价关系时，设所有关系皆为 $x_i+y_i&#x3D;c_i$，$x,y$ 内部之间没有连边，问 $\sum \mid x_i\mid +\mid y_i\mid$ 的最小值   考虑将这个图画出来，得到一个图，因为内部之间都没有连边，所以最后面一定能够构造出来一个二分图 成为一个二分图，也就意味着当我们对其求解得到一个生成树后，深度为奇数的点一定向偶数点连边，假设有这么一个环 ![[Pasted image 20250122221308.png]] 其中 c4 为非树边，那么我们发现就有等式 $$\begin{eqnarray} x_1+y_1 &amp;&#x3D;&amp; c_1 \x_2+y_1 &amp;&#x3D;&amp; c_2 \x_2+y_2 &amp;&#x3D;&amp; c_3 \ \end{eqnarray} \Rightarrow...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/06/%E7%AE%97%E6%B3%95/%E5%AF%B9%202%20%E5%8F%96%E6%A8%A1%E6%84%8F%E4%B9%89%E4%B8%8B%E7%9A%84%E7%BB%84%E5%90%88%E6%95%B0/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-06T08:16:17.588Z" title="发表于 2025-03-06 16:16:17">2025-03-06</time></span></div><div class="content">相关链接：[[组合数学]]，[[卢卡斯定理]] 考虑这个式子：$$\begin{eqnarray}&amp;&amp;  C_{n}^{m} \pmod{2}\&amp;&#x3D;&amp;C_{\lfloor \frac{n}{2} \rfloor}^{\lfloor \frac{m}{2} \rfloor} \cdot C_{n \mod 2}^{m \mod 2} \pmod{2}\\end{eqnarray}$$发现这个下取整可以无限递归下去，直至 $n,m$ 皆为 $0$发现当 $m$ 存在一位二进制位使得 $m$ 为 $1$ 且 $n$ 不为 $1$ 时，则此时的组合数为 $0$也就意味着整个 $C_{n}^{m} \pmod{2}$ 都为 $0$  所以就能得到等式 $$C_{n}^{m} \pmod{2}&#x3D; [m &amp;n&#x3D;m]$$或者说$$C_{n}^{m} \pmod{2}&#x3D; [m \subseteq n]$$ 当遇到方案数对 $2$...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/06/%E7%AE%97%E6%B3%95/%E5%AD%97%E7%AC%A6%E4%B8%B2/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-06T08:16:17.585Z" title="发表于 2025-03-06 16:16:17">2025-03-06</time></span></div><div class="content">[[Kmp]]：[[Trie]]：[[AC自动机]]：[[后缀数组]]：[[后缀自动机]]：[[哈希]]：</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/06/%E7%AE%97%E6%B3%95/%E5%A4%9A%E9%A1%B9%E5%BC%8F/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-06T08:16:17.580Z" title="发表于 2025-03-06 16:16:17">2025-03-06</time></span></div><div class="content">普通多项式当发现求解过程中出现了单单一个自变量的式子时，可以考虑将其拆分为一个多项式，然后在求解时在外部调用即可 # 传染病研究 生成函数多项式科技</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/06/%E7%AE%97%E6%B3%95/%E5%A4%8D%E6%9D%82%E5%BA%A6%E8%AF%81%E6%98%8E/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-06T08:16:17.577Z" title="发表于 2025-03-06 16:16:17">2025-03-06</time></span></div><div class="content">调和级数：$\sum_{i&#x3D;1}^{n}\frac{n}{i}&#x3D; nlogn$ 遇见倍数或者整除的问题时，若每个数唯一出现，考虑枚举倍数 $O(nlogn)$ 若每个数不唯一出现，考虑枚举因数 $O(nlog^2n)$ $\sum_{d \mid n}d&#x3D;nloglogn$ 随机数列最长上升子序列的期望长度为 $O(\sqrt n)$ 好像只能计算机近似计算 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/06/%E7%AE%97%E6%B3%95/%E5%A0%86/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-06T08:16:17.573Z" title="发表于 2025-03-06 16:16:17">2025-03-06</time></span></div><div class="content">对于用堆+[[启发式合并]] 用于树从下往上查询的题目# 人员调度 # 春节十二响 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/06/%E7%AE%97%E6%B3%95/%E5%9B%BE%E8%AE%BA/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-06T08:16:17.569Z" title="发表于 2025-03-06 16:16:17">2025-03-06</time></span></div><div class="content">[[树上问题]]：[[欧拉回路]]：[[连通性相关]]：[[网络流]]：[[最短路]]：[[建图技巧]]：[[最小生成树]]：[[差分约束]]：Trick对于两个位置只能选一个，选完后会产生不同贡献的问题，或者说两种决策选择一种，可以考虑转化为两点之间有一条边，变成 “给边定向” 的问题,然后分析图的性质或转化为 [[欧拉回路]] 问题给边定向 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/06/%E7%AE%97%E6%B3%95/%E5%93%88%E5%B8%8C/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-06T08:16:17.566Z" title="发表于 2025-03-06 16:16:17">2025-03-06</time></span></div><div class="content">伟大的Oi-eR zyb 曾言：“万物皆可哈希” 相关链接[[字符串]]，[[集合]] 字符串哈希可用来判断字符串相等，寻找LCP用于比较字符串等等操作# 星战 - 异或哈希经典例题# 字符串比较上树 集合哈希万物皆可哈希，集合也不例外# NOI2024 集合 利用数列转某种类型数出现次数的 Trick ，可以将有序序列转化为无序集合并哈希，当需要进行区间加操作时，不妨设哈希函数为 $M(A)&#x3D;x^A$ ，那么区间加操作可以等效的视作区间乘 $x^v$ ，并继续使用上述方法维护集合 # same sum 数列哈希不一定只有字符串才会用到哈希，具体要看这个数列是否需要满足字符串的某些形式(如字典序等) 例如 系统设计，可以将与字符串相类似的数列等价的视作字符串，用字符串的方法去解决 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/03/06/%E7%AE%97%E6%B3%95/%E5%90%AF%E5%8F%91%E5%BC%8F%E5%90%88%E5%B9%B6/" title="无标题">无标题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-03-06T08:16:17.562Z" title="发表于 2025-03-06 16:16:17">2025-03-06</time></span></div><div class="content">相关链接：[[线段树合并]] 常见于只有合并没有撤销的题目 Trick树上启发式合并从下往上求解答案 # 人员调度# 春节十二响 注：树上用启发式合并合并堆是 $O(nlogn)$ 的 </div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/9/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/#content-inner">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/#content-inner">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/#content-inner">16</a><a class="extend next" rel="next" href="/page/11/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">my9r</div><div class="author-info-description">Just the owner of this blog</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">156</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/06/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%94%9F%E7%89%A9/%E8%83%9A%E8%83%8E%E5%B7%A5%E7%A8%8B/" title="无标题">无标题</a><time datetime="2025-03-06T08:16:21.491Z" title="发表于 2025-03-06 16:16:21">2025-03-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/06/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%94%9F%E7%89%A9/%E7%BB%86%E8%83%9E%E5%B7%A5%E7%A8%8B/" title="无标题">无标题</a><time datetime="2025-03-06T08:16:21.474Z" title="发表于 2025-03-06 16:16:21">2025-03-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/06/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%94%9F%E7%89%A9/%E7%94%9F%E7%89%A9/" title="无标题">无标题</a><time datetime="2025-03-06T08:16:21.470Z" title="发表于 2025-03-06 16:16:21">2025-03-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/06/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%94%9F%E7%89%A9/%E6%A4%8D%E7%89%A9%E7%BB%86%E8%83%9E%E5%B7%A5%E7%A8%8B/" title="无标题">无标题</a><time datetime="2025-03-06T08:16:21.467Z" title="发表于 2025-03-06 16:16:21">2025-03-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/06/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%94%9F%E7%89%A9/%E6%A0%B8%E7%B3%96%EF%BC%9F%E6%A0%B8%E8%8B%B7%EF%BC%9F%E6%A0%B8%E7%B3%96%E6%A0%B8%E8%8B%B7%EF%BC%9F/" title="无标题">无标题</a><time datetime="2025-03-06T08:16:21.463Z" title="发表于 2025-03-06 16:16:21">2025-03-06</time></div></div></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/03/">
+            <span class="card-archive-list-date">
+              三月 2025
+            </span>
+            <span class="card-archive-list-count">156</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">156</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-03-06T09:21:04.483Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(img/footer_img.png);"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By my9r</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

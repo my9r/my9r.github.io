@@ -1,0 +1,217 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>mygr main() | mygr main()</title><meta name="author" content="my9r"><meta name="copyright" content="my9r"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="T1申必题，后面再做 算了先做吧 看来要高精度 先二进制拆分，然后递归输出 毕竟最后要输出，所以输出长度应该是有保障的 直接做即可 草了byd是大模拟 写了一个小时 希望能过 T2SA板子题？ 好像又不太对 感觉不如t1 这么大的询问一眼离线 建trie树，每个点此时表示一个子串 每个点额外维护一个 tim 表示子串最近加入时间 从左往右添加即可 对于区间加操作则差分 注意子串长度 对于一个点 $">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mygr main()">
+<meta property="og:url" content="http://example.com/2025/03/06/%E6%97%A5%E8%AE%B0/mygr%E7%9A%84%E6%97%A5%E8%AE%B0/2024%E5%B9%B4/20241009/index.html">
+<meta property="og:site_name" content="mygr main()">
+<meta property="og:description" content="T1申必题，后面再做 算了先做吧 看来要高精度 先二进制拆分，然后递归输出 毕竟最后要输出，所以输出长度应该是有保障的 直接做即可 草了byd是大模拟 写了一个小时 希望能过 T2SA板子题？ 好像又不太对 感觉不如t1 这么大的询问一眼离线 建trie树，每个点此时表示一个子串 每个点额外维护一个 tim 表示子串最近加入时间 从左往右添加即可 对于区间加操作则差分 注意子串长度 对于一个点 $">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/avatar.jpg">
+<meta property="article:published_time" content="2025-03-06T08:16:17.224Z">
+<meta property="article:modified_time" content="2025-01-21T09:29:15.920Z">
+<meta property="article:author" content="my9r">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "",
+  "url": "http://example.com/2025/03/06/%E6%97%A5%E8%AE%B0/mygr%E7%9A%84%E6%97%A5%E8%AE%B0/2024%E5%B9%B4/20241009/",
+  "image": "http://example.com/img/avatar.jpg",
+  "datePublished": "2025-03-06T08:16:17.224Z",
+  "dateModified": "2025-01-21T09:29:15.920Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "my9r",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/03/06/%E6%97%A5%E8%AE%B0/mygr%E7%9A%84%E6%97%A5%E8%AE%B0/2024%E5%B9%B4/20241009/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'mygr main()',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background: black;"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(img/welcome-cover.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">mygr main()</span></a><a class="nav-page-title" href="/"><span class="site-name">mygr main()</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">无标题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-03-06T08:16:17.224Z" title="发表于 2025-03-06 16:16:17">2025-03-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-01-21T09:29:15.920Z" title="更新于 2025-01-21 17:29:15">2025-01-21</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="T1"><a href="#T1" class="headerlink" title="T1"></a>T1</h1><p>申必题，后面再做</p>
+<p>算了先做吧</p>
+<p>看来要高精度</p>
+<p>先二进制拆分，然后递归输出</p>
+<p>毕竟最后要输出，所以输出长度应该是有保障的</p>
+<p>直接做即可</p>
+<p>草了byd是大模拟</p>
+<p>写了一个小时</p>
+<p>希望能过</p>
+<h1 id="T2"><a href="#T2" class="headerlink" title="T2"></a>T2</h1><p>SA板子题？</p>
+<p>好像又不太对</p>
+<p>感觉不如t1</p>
+<p>这么大的询问一眼离线</p>
+<p>建trie树，每个点此时表示一个子串</p>
+<p>每个点额外维护一个 tim 表示子串最近加入时间</p>
+<p>从左往右添加即可</p>
+<p>对于区间加操作则差分</p>
+<p>注意子串长度</p>
+<p>对于一个点 $i$ ，他表示的子串长度为 $len_i$ ,时间为 $tim_i$ ，那么其左端点为 $tim_i-len_i+1$ ,新左端点为 $r-len_i+1$ ，那么对应的操作就是区间 $[tim_i-len_i+2,r-len_i+1]$ 加1</p>
+<p>应该就做完了？</p>
+<h1 id="T3"><a href="#T3" class="headerlink" title="T3"></a>T3</h1><p>不会，不会是字符串专场吧</p>
+<p>欸</p>
+<p>眼熟</p>
+<p>草了，开猜</p>
+<p>对于任意两个前缀 $S_1,S_1c$ 而言，$S_1$ 作为前缀且接上一个以 $c$ 为开头的后缀能够表示出来的字符串一定是 $S_1c$ 作前缀的子集</p>
+<p>也就是说：$S_1+c$ 其实是无用的，不需要统计</p>
+<p>但假设没有任意一个前缀满足 $S_1+z$ ，那么他就是唯一的</p>
+<p>所以建两棵trie树， 排除掉其有儿子的情况后接上其他的即可</p>
+<p>可能是对的？</p>
+<p>建议跑跑对拍</p>
+<p>等下</p>
+<p>这个后缀不太对劲</p>
+<p>它的开头有点问题</p>
+<p>我的第一步其实本质上是在去重，即去掉相同前缀</p>
+<p>第二步也需要去重，不过去的是后缀的重</p>
+<p>但事实上而言，我是不是直接哈希也是可行的？</p>
+<p>所以前面的去重，后面的哈希</p>
+<p>可能会漏记</p>
+<p>我们额外规定 “对于一个前缀树上的节点，若它的上层节点能够通过添加一个字符而变为它自身，那么就算合法”</p>
+<p>其实本质上而言，我们是在对能够表示出来的字符串做分类</p>
+<p>如果一个字符串 $S$ 能够被表示为 $S_1S_2$ 那么他一定能够表示为一个唯一的 $S_1S_2$ 匹配满足 $S_1$ 最长，$S_2$ 不为0</p>
+<h1 id="T4"><a href="#T4" class="headerlink" title="T4"></a>T4</h1><p>矩阵乘法？</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">my9r</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/03/06/%E6%97%A5%E8%AE%B0/mygr%E7%9A%84%E6%97%A5%E8%AE%B0/2024%E5%B9%B4/20241009/">http://example.com/2025/03/06/%E6%97%A5%E8%AE%B0/mygr%E7%9A%84%E6%97%A5%E8%AE%B0/2024%E5%B9%B4/20241009/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">mygr main()</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/03/06/%E6%97%A5%E8%AE%B0/mygr%E7%9A%84%E6%97%A5%E8%AE%B0/mygr%E7%9A%84%E6%97%A5%E8%AE%B0/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2"></div></div><div class="info-2"><div class="info-item-1">按时间排序： [[2024年]]：[[2025年]]：</div></div></div></a><a class="pagination-related" href="/2025/03/06/%E6%97%A5%E8%AE%B0/mygr%E7%9A%84%E6%97%A5%E8%AE%B0/2024%E5%B9%B4/20241011/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2"></div></div><div class="info-2"><div class="info-item-1">T1不会，感觉像之前那道 bitset优化的大暴力 现在做完T2了还是不会，只会 $O(nm)$ 的 咱总不能正解真是这个复杂度吧 真是我捶死出题人 nm1e9 正好1e9 这是能跑的吗？ 欸🤓👆，是不是可以这样子 我先一遍大 $n^2$ 求出所有两个数能合成出来的数，额外记录一个时间戳表示他最早在什么时候出现 然后接下来直接log查询就好了 unorder会T pbds改变生活！ 希望能过 T2矩阵乘法？ 设状态分别为 |上一个数为无用数，上一个为 S，上两个为 SO |上一个数为无用数，上一个为 S，上两个为 SO |同|无所谓下一个是什么 ​							已存在0个SOS                                                       已存在1个SOS 矩阵快速幂即可 总共10个状态 upd:8:18做完了:underage: 希望能过 T3显然是可以用线段树维护的 设 $f_{i}$ 表示有 $i$...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">my9r</div><div class="author-info-description">Just the owner of this blog</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">156</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#T1"><span class="toc-number">1.</span> <span class="toc-text">T1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#T2"><span class="toc-number">2.</span> <span class="toc-text">T2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#T3"><span class="toc-number">3.</span> <span class="toc-text">T3</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#T4"><span class="toc-number">4.</span> <span class="toc-text">T4</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/06/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%94%9F%E7%89%A9/%E8%83%9A%E8%83%8E%E5%B7%A5%E7%A8%8B/" title="无标题">无标题</a><time datetime="2025-03-06T08:16:21.491Z" title="发表于 2025-03-06 16:16:21">2025-03-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/06/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%94%9F%E7%89%A9/%E7%BB%86%E8%83%9E%E5%B7%A5%E7%A8%8B/" title="无标题">无标题</a><time datetime="2025-03-06T08:16:21.474Z" title="发表于 2025-03-06 16:16:21">2025-03-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/06/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%94%9F%E7%89%A9/%E7%94%9F%E7%89%A9/" title="无标题">无标题</a><time datetime="2025-03-06T08:16:21.470Z" title="发表于 2025-03-06 16:16:21">2025-03-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/06/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%94%9F%E7%89%A9/%E6%A4%8D%E7%89%A9%E7%BB%86%E8%83%9E%E5%B7%A5%E7%A8%8B/" title="无标题">无标题</a><time datetime="2025-03-06T08:16:21.467Z" title="发表于 2025-03-06 16:16:21">2025-03-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/06/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%94%9F%E7%89%A9/%E6%A0%B8%E7%B3%96%EF%BC%9F%E6%A0%B8%E8%8B%B7%EF%BC%9F%E6%A0%B8%E7%B3%96%E6%A0%B8%E8%8B%B7%EF%BC%9F/" title="无标题">无标题</a><time datetime="2025-03-06T08:16:21.463Z" title="发表于 2025-03-06 16:16:21">2025-03-06</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(img/footer_img.png);"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By my9r</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
