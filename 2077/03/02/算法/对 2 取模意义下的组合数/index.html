@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>对 2 取模意义下的组合数 | mygr main()</title><meta name="author" content="my9r"><meta name="copyright" content="my9r"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="相关链接：[[组合数学]]，[[卢卡斯定理]] 考虑这个式子：$$\begin{eqnarray}&amp;&amp;  C_{n}^{m} \pmod{2}\&amp;&#x3D;&amp;C_{\lfloor \frac{n}{2} \rfloor}^{\lfloor \frac{m}{2} \rfloor} \cdot C_{n \mod 2}^{m \mod 2} \pmod{2}\\en">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对 2 取模意义下的组合数">
+<meta property="og:url" content="http://example.com/2077/03/02/%E7%AE%97%E6%B3%95/%E5%AF%B9%202%20%E5%8F%96%E6%A8%A1%E6%84%8F%E4%B9%89%E4%B8%8B%E7%9A%84%E7%BB%84%E5%90%88%E6%95%B0/index.html">
+<meta property="og:site_name" content="mygr main()">
+<meta property="og:description" content="相关链接：[[组合数学]]，[[卢卡斯定理]] 考虑这个式子：$$\begin{eqnarray}&amp;&amp;  C_{n}^{m} \pmod{2}\&amp;&#x3D;&amp;C_{\lfloor \frac{n}{2} \rfloor}^{\lfloor \frac{m}{2} \rfloor} \cdot C_{n \mod 2}^{m \mod 2} \pmod{2}\\en">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/avatar.jpg">
+<meta property="article:published_time" content="2077-03-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-06T09:49:04.428Z">
+<meta property="article:author" content="my9r">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/avatar.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "对 2 取模意义下的组合数",
+  "url": "http://example.com/2077/03/02/%E7%AE%97%E6%B3%95/%E5%AF%B9%202%20%E5%8F%96%E6%A8%A1%E6%84%8F%E4%B9%89%E4%B8%8B%E7%9A%84%E7%BB%84%E5%90%88%E6%95%B0/",
+  "image": "http://example.com/img/avatar.jpg",
+  "datePublished": "2077-03-01T16:00:00.000Z",
+  "dateModified": "2025-03-06T09:49:04.428Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "my9r",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2077/03/02/%E7%AE%97%E6%B3%95/%E5%AF%B9%202%20%E5%8F%96%E6%A8%A1%E6%84%8F%E4%B9%89%E4%B8%8B%E7%9A%84%E7%BB%84%E5%90%88%E6%95%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '对 2 取模意义下的组合数',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background: black;"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(img/welcome-cover.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">mygr main()</span></a><a class="nav-page-title" href="/"><span class="site-name">对 2 取模意义下的组合数</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">对 2 取模意义下的组合数</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2077-03-01T16:00:00.000Z" title="发表于 2077-03-02 00:00:00">2077-03-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-03-06T09:49:04.428Z" title="更新于 2025-03-06 17:49:04">2025-03-06</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>相关链接：[[组合数学]]，[[卢卡斯定理]]</p>
+<p>考虑这个式子：<br>$$\begin{eqnarray}<br>&amp;&amp;  C_{n}^{m} \pmod{2}\<br>&amp;&#x3D;&amp;C_{\lfloor \frac{n}{2} \rfloor}^{\lfloor \frac{m}{2} \rfloor} \cdot C_{n \mod 2}^{m \mod 2} \pmod{2}\<br>\end{eqnarray}<br>$$<br>发现这个下取整可以无限递归下去，直至 $n,m$ 皆为 $0$<br>发现当 $m$ 存在一位二进制位使得 $m$ 为 $1$ 且 $n$ 不为 $1$ 时，则此时的组合数为 $0$<br>也就意味着整个 $C_{n}^{m} \pmod{2}$ 都为 $0$ </p>
+<p>所以就能得到等式</p>
+<p>$$C_{n}^{m} \pmod{2}&#x3D; [m &amp;n&#x3D;m]$$<br>或者说<br>$$C_{n}^{m} \pmod{2}&#x3D; [m \subseteq n]$$</p>
+<p>当遇到方案数对 $2$ 取模的问题时，考虑能不能构造双射使得其去除掉某些计算过程，或将不满足条件的方案剔除</p>
+<p>对于方案数对 $2$ 取模的题目，考虑是否能够通过 bitset 优化</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">my9r</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2077/03/02/%E7%AE%97%E6%B3%95/%E5%AF%B9%202%20%E5%8F%96%E6%A8%A1%E6%84%8F%E4%B9%89%E4%B8%8B%E7%9A%84%E7%BB%84%E5%90%88%E6%95%B0/">http://example.com/2077/03/02/%E7%AE%97%E6%B3%95/%E5%AF%B9%202%20%E5%8F%96%E6%A8%A1%E6%84%8F%E4%B9%89%E4%B8%8B%E7%9A%84%E7%BB%84%E5%90%88%E6%95%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">mygr main()</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/">算法</a></div><div class="post-share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2077/03/02/%E7%AE%97%E6%B3%95/%E5%AD%97%E7%AC%A6%E4%B8%B2/" title="字符串"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">字符串</div></div><div class="info-2"><div class="info-item-1">[[Kmp]]：[[Trie]]：[[AC自动机]]：[[后缀数组]]：[[后缀自动机]]：[[哈希]]：</div></div></div></a><a class="pagination-related" href="/2077/03/02/%E7%AE%97%E6%B3%95/%E5%B7%AE%E5%88%86%E7%BA%A6%E6%9D%9F/" title="差分约束"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">差分约束</div></div><div class="info-2"><div class="info-item-1">不常考的算法，但得会 本质是通过最短路的思路求解出一个 $n$ 元一次方程组的解 # 矩阵游戏 # 糖果 Trick当差分约束中所有边都为等价关系时，设所有关系皆为 $x_i+y_i&#x3D;c_i$，$x,y$ 内部之间没有连边，问 $\sum \mid x_i\mid +\mid y_i\mid$ 的最小值   考虑将这个图画出来，得到一个图，因为内部之间都没有连边，所以最后面一定能够构造出来一个二分图 成为一个二分图，也就意味着当我们对其求解得到一个生成树后，深度为奇数的点一定向偶数点连边，假设有这么一个环 ![[Pasted image 20250122221308.png]] 其中 c4 为非树边，那么我们发现就有等式 $$\begin{eqnarray} x_1+y_1 &amp;&#x3D;&amp; c_1 \x_2+y_1 &amp;&#x3D;&amp; c_2 \x_2+y_2 &amp;&#x3D;&amp; c_3 \ \end{eqnarray} \Rightarrow...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2077/03/02/%E7%AE%97%E6%B3%95/AC%E8%87%AA%E5%8A%A8%E6%9C%BA/" title="AC自动机"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2077-03-02</div><div class="info-item-2">AC自动机</div></div><div class="info-2"><div class="info-item-1">当字符集较大时，可以考虑使用可持久化数组维护 ch 数组 AC自动机上判断某串的子串，考虑枚举前缀然后跳 $fail$ ，可以考虑建出 $fail$ 树，然后在走前缀的过程中用数据结构或连边建图表示出包含关系 # birthday </div></div></div></a><a class="pagination-related" href="/2077/03/02/%E7%AE%97%E6%B3%95/BSET%E5%AE%9A%E7%90%86/" title="BSET定理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2077-03-02</div><div class="info-item-2">BSET定理</div></div><div class="info-2"><div class="info-item-1">相关链接：[[矩阵树定理]]，[[欧拉回路]] 对于一个有向图，对于它的欧拉回路个数 $ec(G)$ ，有 $$ec(G)&#x3D;root_{w}(G)\sum_{v\in V}(deg_v -1)!$$其中 $root_w(G)$ 表示以 $w$ 为根的 $G$ 的外向生成树有多少种 注意BEST定理计算的是两点间若干条边有顺序的方案数，如果是 “某条边能够经过的次数” 则应当除去 $\frac{1}{w!}$ 将顺序消掉 例题：# Counting Prefixes# C4 </div></div></div></a><a class="pagination-related" href="/2077/03/02/%E7%AE%97%E6%B3%95/KD-Tree/" title="KD-Tree"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2077-03-02</div><div class="info-item-2">KD-Tree</div></div><div class="info-2"><div class="info-item-1">本质：将一个 $k$ 维的立方体内的点压缩到序列上 $O(n^{1-\frac{1}{k}})$ 个不相交区间 而这个序列就可以用正常方法去维护了 例题：# P6783 Ynoi2008 rrusq </div></div></div></a><a class="pagination-related" href="/2077/03/02/%E7%AE%97%E6%B3%95/DAG%E9%93%BE%E5%89%96%E5%88%86/" title="DAG链剖分"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2077-03-02</div><div class="info-item-2">DAG链剖分</div></div><div class="info-2"><div class="info-item-1">对于 DAG 上的节点，设 $f_{u}$ 表示以点 $u$ 为结束点的路径数，$g_u$ 表示从点 $u$ 开始的路径数，那么对于节点 $u$ 的所有出边，若存在一条边 $u \rightarrow v$ 使得 $2f_{v}&gt;f_{u},2g_{v}&gt;g_{u}$ ，那么我们则称 $u,v$ 是一条重边 对于任意一条路径，其路径上的轻边数量一定是 $O(logn)$ 级别的，因为每走一次轻边路径数都会折半 最常用的场景是在 [[后缀自动机]] 上快速的子串定位 为什么不倍增跳呢？ #under_construction </div></div></div></a><a class="pagination-related" href="/2077/03/02/%E7%AE%97%E6%B3%95/Kmp/" title="Kmp"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2077-03-02</div><div class="info-item-2">Kmp</div></div><div class="info-2"><div class="info-item-1">kmp的fail数组既可以指最长的前后缀长度，也可以指当前位的最长的前缀匹配，也可以指最长的循环节长度 #under_construction字符串的所有前缀中，有多少个可以构成形如 “ABABA” 由 k 个A 组成的字符串 通过不断跳fail的方式可以求出最短的前缀匹配，可以通过继承优化到 $O(n+m)$ 例子  </div></div></div></a><a class="pagination-related" href="/2077/03/02/%E7%AE%97%E6%B3%95/RMQ%E9%97%AE%E9%A2%98/" title="RMQ问题"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2077-03-02</div><div class="info-item-2">RMQ问题</div></div><div class="info-2"><div class="info-item-1">考虑一个 $O(n)$ 预处理，$O(1)$ 查询的 RMQ 算法 考虑将序列按照 $logn$ 进行分块，对于不在一个同块内部的询问，我们用ST表维护整块的信息，再额外维护块内的前后缀最大值即可 对于在一个块内的查询，我们可以开一个单调栈维护一个前缀的单调下降序列，每一位使用一个整数状压单调栈内拥有的元素，查询 $l,r$ 时直接找 $r$ 对应的单调栈中第一个 $\ge l$ 的位置即可 </div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">my9r</div><div class="author-info-description">Just the owner of this blog</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">157</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2077/03/02/%E6%96%87%E5%8C%96%E8%AF%BE/%E6%96%87%E5%8C%96%E8%AF%BE%E4%B8%93%E6%A0%8F/" title="文化课专栏">文化课专栏</a><time datetime="2077-03-01T16:00:00.000Z" title="发表于 2077-03-02 00:00:00">2077-03-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2077/03/02/%E9%A2%98%E8%A7%A3/AT_awtf2024_d%20Almost%20Bubble%20Sort%20%E9%A2%98%E8%A7%A3/" title="AT_awtf2024_d Almost Bubble Sort 题解">AT_awtf2024_d Almost Bubble Sort 题解</a><time datetime="2077-03-01T16:00:00.000Z" title="发表于 2077-03-02 00:00:00">2077-03-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2077/03/02/%E9%A2%98%E8%A7%A3/AT_cf17_final_j%20Tree%20MST%20%E9%A2%98%E8%A7%A3/" title="AT_cf17_final_j Tree MST 题解">AT_cf17_final_j Tree MST 题解</a><time datetime="2077-03-01T16:00:00.000Z" title="发表于 2077-03-02 00:00:00">2077-03-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2077/03/02/%E9%A2%98%E8%A7%A3/P4694%20PA%202013%20Raper/" title="P4694 PA 2013 Raper">P4694 PA 2013 Raper</a><time datetime="2077-03-01T16:00:00.000Z" title="发表于 2077-03-02 00:00:00">2077-03-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2077/03/02/%E7%AE%97%E6%B3%95/AC%E8%87%AA%E5%8A%A8%E6%9C%BA/" title="AC自动机">AC自动机</a><time datetime="2077-03-01T16:00:00.000Z" title="发表于 2077-03-02 00:00:00">2077-03-02</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(img/footer_img.png);"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By my9r</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css')
+    if (true) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
