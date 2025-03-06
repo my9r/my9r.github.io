@@ -9,74 +9,6 @@
       </tags>
   </entry>
   <entry>
-    <title>AT_awtf2024_d Almost Bubble Sort 题解</title>
-    <url>/2077/03/02/%E9%A2%98%E8%A7%A3/AT_awtf2024_d%20Almost%20Bubble%20Sort%20%E9%A2%98%E8%A7%A3/</url>
-    <content><![CDATA[<p>考虑这么证明：</p>
-<p>将所有点绘制到一个坐标系上，若一个点被选择了，则我们称其为 $1$ </p>
-<p>结论：当我们有 $i &lt; j,p_{i} &gt; p_{j}$ 且 $i$ 被选择，则 $j$ 一定被选择</p>
-<p>我们考虑这么证明：若 $j$ 被选择，则一定能够构造出一种新的方案使得其比当前方案更优</p>
-<p>使用反证法，不妨设当前是最优答案且答案中存在两位置 $i,j$ 使得 $i&lt;j,p_i&gt;p_j$ 且 $i$ 选 $j$ 不选</p>
-<p>不妨找到其中使得 $p_j-p_i$ 最小的 $i,j$ ，那么他就会满足</p>
-<ul>
-<li>$p_i,p_j$ 中间没有比 $p_i$ 小且被选择的点</li>
-<li>$p_i,p_j$ 中间没有比 $p_j$ 大且未被选择的点</li>
-<li>没有值在 $i，j$ 中间的元素</li>
-</ul>
-<p>发现这样就将整个平面分割为了九个部分，我们分别将其称为</p>
-<p>$$\begin{array}{a|a|a|a}<br>\hline 1 &amp; 2 &amp; 3 \<br>\hline 4 &amp; 5 &amp; 6 \<br>\hline 7 &amp; 8 &amp; 9 \<br>\hline<br>\end{array}$$<br>考虑让 $i,j$ 选择反转，计算每一部分的贡献</p>
-<ul>
-<li>$(1,0),1 \rightarrow 0$</li>
-<li>$(4,0),1 \rightarrow 0$</li>
-<li>$(7,0),0 \rightarrow 0$</li>
-<li>$(2,0),1 \rightarrow 0$</li>
-<li>$(8,0),1 \rightarrow 1$</li>
-<li>$(3,0),1 \rightarrow 1$</li>
-<li>$(1,1),2 \rightarrow 2$</li>
-<li>$(7,1),1 \rightarrow 1$</li>
-<li>$(2,1),1 \rightarrow 1$</li>
-<li>$(8,1),1 \rightarrow 0$</li>
-<li>$(3,1),0 \rightarrow 0$</li>
-<li>$(6,1),1 \rightarrow 0$</li>
-<li>$(9,1),1 \rightarrow 1$</li>
-</ul>
-<p>然后你发现每一位要么不变，要么变小，再加上本次操作后一定会 $-1$ ，于是我们就构造出了一种方案使得答案比当前答案更小，与假设相悖，所以得证</p>
-<p>故最终答案中一定不存在 $i&lt;j,p_i&gt;p_j$ 且 $i$ 被选择的情况，故我们可以推出当 $i$ 被选择时，$j$ 一定选择  </p>
-<p>然后我们就可以拆贡献，考虑计算当一个点被选择时能够产生的贡献</p>
-<p>此时以此为原点绘制平面直角坐标系，则第一象限的 $0$ 点会产生 $1$ 的贡献，第二象限的 $0$ 会产生 $-1$ 的贡献，第三象限的 $1$ 会产生 $-1$ 的贡献，第四象限的 $1$ 会产生 $1$ 的贡献</p>
-<p>这样要同时讨论 $0,1$ 两种点，有点麻烦，不妨在一开始就加上每个点一二象限的贡献，转化成一三象限会产生 $1$ 的贡献，二四象限会产生 $-1$ 的贡献</p>
-]]></content>
-      <tags>
-        <tag>题解</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>AT_cf17_final_j Tree MST 题解</title>
-    <url>/2077/03/02/%E9%A2%98%E8%A7%A3/AT_cf17_final_j%20Tree%20MST%20%E9%A2%98%E8%A7%A3/</url>
-    <content><![CDATA[<p>考虑使用 b 算法解决</p>
-<p>问题就变成了：对于一个集合 $S$ ，我如何去寻找一个点 $p$ 使得 </p>
-<p>$$\min_{s \in S}w_{p}+w_{s}+dis_{p,s} \le \min_{s\in S,j\not \in S \wedge j \not &#x3D; p}w_{s}+w_{j}+dis_{s,j}$$<br>我们称每个节点所属的集合为他的颜色</p>
-<p>考虑启发式合并，对树上每一个点 $u$ 用一个 $set$  维护子树内每种颜色的点的 $dis_{u,p}+w_{p}$ 的最小值，额外维护所有颜色中的最小值和次小值，启发式合并的同时统计每种颜色的答案即可</p>
-<p>发现其实不用启发式合并，用类似树形dp的方式上下 dfs 即可</p>
-]]></content>
-      <tags>
-        <tag>题解</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>P4694 PA 2013 Raper</title>
-    <url>/2077/03/02/%E9%A2%98%E8%A7%A3/P4694%20PA%202013%20Raper/</url>
-    <content><![CDATA[<p>考虑将每次的决策分为两部分：从左往右的以及从右往左的</p>
-<p>额外记录一个 $f_i,g_i$ 表示 $a_i,b_i$ 是否被选择</p>
-<p>对于从左往右的，直接线段树上分治即可</p>
-<p>对于从右往左的，我们考虑记录一个 $h_i$ 表示 $i+1$ 到 $i$ 的反向边的流量</p>
-<p>考虑记录区间前缀的最大联通 $b_i$ ，区间后缀的最大联通 $a_i$ ，区间内最大的从右到左段的大小，区间从右往左方案中的最大值</p>
-<p>因为区间内 $h_i$ 非负，所以只需要记录区间内 $Min$ 为 $0$ 以及 $Min$ 非 $0$ 的情况即可</p>
-]]></content>
-      <tags>
-        <tag>题解</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>AC自动机</title>
     <url>/2077/03/02/%E7%AE%97%E6%B3%95/AC%E8%87%AA%E5%8A%A8%E6%9C%BA/</url>
     <content><![CDATA[<p>当字符集较大时，可以考虑使用可持久化数组维护 <code>ch</code> 数组</p>
@@ -84,46 +16,6 @@
 ]]></content>
       <tags>
         <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>P7486 「Stoi2031」彩虹 题解</title>
-    <url>/2077/03/02/%E9%A2%98%E8%A7%A3/P7486%20%E3%80%8CStoi2031%E3%80%8D%E5%BD%A9%E8%99%B9%20%E9%A2%98%E8%A7%A3/</url>
-    <content><![CDATA[<p>没啥好说的，暴解</p>
-<p>$$\begin{eqnarray}<br>&amp;&amp; \prod_{i&#x3D;l}^{r}\prod_{j&#x3D;l}^{r} \frac{ij}{gcd(i,j)}^{\frac{ij}{gcd(i,j)}} \<br>\end{eqnarray}$$<br>设 $f(x,y)&#x3D;\prod_{i&#x3D;1}^{x}\prod_{j&#x3D;1}^{y} \frac{ij}{gcd(i,j)}^{\frac{ij}{gcd(i,j)}}$</p>
-<p>那么答案则为</p>
-<p>$$\frac{f(r,r)f(l-1,l-1)}{f(l-1,r)f(r,l-1)}$$</p>
-<p>$$\begin{eqnarray}</p>
-<p>f(x,y)&amp;&#x3D;&amp;\prod_{i&#x3D;1}^{x}\prod_{j&#x3D;1}^{y} \frac{ij}{gcd(i,j)}^{\frac{ij}{gcd(i,j)}}\<br>&amp;&#x3D;&amp;\prod_{d&#x3D;1}^{y}\prod_{i&#x3D;1}^{x}\prod_{j&#x3D;1}^{y} \frac{ij}{d}^{\frac{ij}{d}[gcd(i,j)&#x3D;d]}\<br>&amp;&#x3D;&amp;\prod_{d&#x3D;1}^{y}\prod_{i&#x3D;1}^{\left\lfloor\frac{x}{d}\right\rfloor}\prod_{j&#x3D;1}^{\left\lfloor\frac{y}{d}\right\rfloor} dij^{dij[gcd(i,j)&#x3D;1]}\<br>&amp;&#x3D;&amp;\prod_{d&#x3D;1}^{y}\prod_{i&#x3D;1}^{\left\lfloor\frac{x}{d}\right\rfloor}\prod_{j&#x3D;1}^{\left\lfloor\frac{y}{d}\right\rfloor} dij^{dij\sum\limits_{p \mid gcd(i,j)}\mu(p)}\<br>&amp;&#x3D;&amp;\prod_{d&#x3D;1}^{y}\prod_{i&#x3D;1}^{\left\lfloor\frac{x}{d}\right\rfloor}\prod_{j&#x3D;1}^{\left\lfloor\frac{y}{d}\right\rfloor} dij^{dij\sum\limits_{p&#x3D;1}^{\left\lfloor \frac{y}{d} \right\rfloor}\mu(p)[p \mid i][\mid j]}\<br>&amp;&#x3D;&amp;\prod_{d&#x3D;1}^{y}\prod\limits_{p&#x3D;1}^{\left\lfloor \frac{y}{d} \right\rfloor}\prod_{i&#x3D;1}^{\left\lfloor\frac{x}{dp}\right\rfloor}\prod_{j&#x3D;1}^{\left\lfloor\frac{y}{dp}\right\rfloor} (ijdp^2)^{ijdp^2\mu(p)}\<br>&amp;&#x3D;&amp;\prod_{T&#x3D;1}^{y}\prod\limits_{p\mid T}\prod_{i&#x3D;1}^{\left\lfloor\frac{x}{T}\right\rfloor}\prod_{j&#x3D;1}^{\left\lfloor\frac{y}{T}\right\rfloor} (ijTp)^{ijTp\mu(p)}\<br>&amp;&#x3D;&amp;\prod_{T&#x3D;1}^{y}\prod\limits_{p\mid T}\left(\prod_{i&#x3D;1}^{\left\lfloor\frac{x}{T}\right\rfloor}\prod_{j&#x3D;1}^{\left\lfloor\frac{y}{T}\right\rfloor} (ij)^{ij}\times(Tp)^{S(\left\lfloor\frac{x}{T}\right\rfloor)S(\left\lfloor\frac{y}{T}\right\rfloor)}\right)^{Tp\mu(p)}\</p>
-<p>\end{eqnarray}$$<br>不妨设 $g(x,y)&#x3D;\prod_{i&#x3D;1}^{x}\prod_{j&#x3D;1}^{y} (ij)^{ij},D(x)&#x3D;\prod_{i&#x3D;1}^{x}i^i$ ，那么有</p>
-<p>$$g(x,y)&#x3D;D(x)^{S_{y}} \times D(y)^{S_{x}}$$<br>将其替换</p>
-<p>$$\begin{eqnarray}<br>&amp;&#x3D;&amp;\prod_{T&#x3D;1}^{y}\prod\limits_{p\mid T}\left(g\left(\left\lfloor \frac{x}{T} \right\rfloor,\left\lfloor \frac{y}{T} \right\rfloor\right) \times(Tp)^{S(\left\lfloor\frac{x}{T}\right\rfloor)S(\left\lfloor\frac{y}{T}\right\rfloor)}\right)^{Tp\mu(p)}\</p>
-<p>\end{eqnarray}$$<br>不妨设 $h(x)&#x3D;\sum_{d \mid x}d\mu(d),w(x)&#x3D;\prod_{d \mid x}d^{d\mu(d)}$，那么有</p>
-<p>$$\begin{eqnarray}<br>&amp;&#x3D;&amp;\prod_{T&#x3D;1}^{y}\left(g\left(\left\lfloor \frac{x}{T} \right\rfloor,\left\lfloor \frac{y}{T} \right\rfloor\right)^{Th(T)}(T^{h(T)}\prod\limits_{p\mid T}p^{p\mu(p)})^{TS(\left\lfloor\frac{x}{T}\right\rfloor)S(\left\lfloor\frac{y}{T}\right\rfloor)}\right)\<br>&amp;&#x3D;&amp;\prod_{T&#x3D;1}^{y}g\left(\left\lfloor \frac{x}{T} \right\rfloor,\left\lfloor \frac{y}{T} \right\rfloor\right)^{Th(T)}\left(T^{h(T)}w(T)\right)^{TS(\left\lfloor\frac{x}{T}\right\rfloor)S(\left\lfloor\frac{y}{T}\right\rfloor)}\</p>
-<p>\end{eqnarray}$$<br>最后再设 $E(x)&#x3D;\left(T^{h(T)}w(T)\right)^T,H(x)&#x3D;Th(T)$ ，就变成了</p>
-<p>$$\begin{eqnarray}</p>
-<p>&amp;&#x3D;&amp;\prod_{T&#x3D;1}^{y}g\left(\left\lfloor \frac{x}{T} \right\rfloor,\left\lfloor \frac{y}{T} \right\rfloor\right)^{Th(T)}E(T)^{S(\left\lfloor\frac{x}{T}\right\rfloor)S(\left\lfloor\frac{y}{T}\right\rfloor)}\</p>
-<p>\end{eqnarray}$$</p>
-<p>于是我们需要预处理以下东西</p>
-<p>$h(i),E(i)$ 的前缀和</p>
-<p>$D(i),w(i)$</p>
-]]></content>
-      <tags>
-        <tag>题解</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>P7907 Ynoi2005 rmscne 题解</title>
-    <url>/2077/03/02/%E9%A2%98%E8%A7%A3/P7907%20Ynoi2005%20rmscne%20%E9%A2%98%E8%A7%A3/</url>
-    <content><![CDATA[<p>很妙的思路转换</p>
-<p>显然扫描线，一个很自然的想法是用数据结构维护 $f_i$ 表示左端点为 $i$ 时…的答案，然后单点查询，但是我们发现当 $l$ 不同时，其对应的答案其实也是不好维护的</p>
-<p>考虑这么转换，假设查询区间为 $[l,r]$ ，其内部有一个子区间 $[l’,r’]$ ，那么合法的 $l’$ 一定是 $[l,r]$ 的一段前缀，发现通过这么转化可以成功的将单点查询转化为区间查询</p>
-<p>这样有什么好处呢？首先我们可以二分得到这个前缀的具体区间，接下来对于这个前缀内的每个 $l’$ 一定能够找到一个对应的 $r’$ 使得其合法，所以说即使对于不同的 $l$ ，只要其被包含在前缀区间内，那么他的答案都是相同的，记其为 $f_i$ ，那么我们最后要求的其实就是</p>
-<p>$$\min_{p \in [l_e,r_e]}f_{p}-p+1$$<br>然后我们发现当我们对应的 $r \leftarrow r+1$ 时，我们只需要更新 $i \in [las_{a_r},r]$ 的 $f_{i}\leftarrow r$ 即可 </p>
-<p>然后就做完了</p>
-]]></content>
-      <tags>
-        <tag>题解</tag>
       </tags>
   </entry>
   <entry>
@@ -140,23 +32,23 @@
       </tags>
   </entry>
   <entry>
-    <title>KD-Tree</title>
-    <url>/2077/03/02/%E7%AE%97%E6%B3%95/KD-Tree/</url>
-    <content><![CDATA[<p>本质：将一个 $k$ 维的立方体内的点压缩到序列上 $O(n^{1-\frac{1}{k}})$ 个不相交区间</p>
-<p>而这个序列就可以用正常方法去维护了</p>
-<p>例题：<a href="https://www.luogu.com.cn/problem/P6783"># P6783 Ynoi2008 rrusq</a></p>
-]]></content>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>DAG链剖分</title>
     <url>/2077/03/02/%E7%AE%97%E6%B3%95/DAG%E9%93%BE%E5%89%96%E5%88%86/</url>
     <content><![CDATA[<p>对于 DAG 上的节点，设 $f_{u}$ 表示以点 $u$ 为结束点的路径数，$g_u$ 表示从点 $u$ 开始的路径数，那么对于节点 $u$ 的所有出边，若存在一条边 $u \rightarrow v$ 使得 $2f_{v}&gt;f_{u},2g_{v}&gt;g_{u}$ ，那么我们则称 $u,v$ 是一条重边</p>
 <p>对于任意一条路径，其路径上的轻边数量一定是 $O(logn)$ 级别的，因为每走一次轻边路径数都会折半</p>
 <p>最常用的场景是在 [[后缀自动机]] 上快速的子串定位</p>
 <p>为什么不倍增跳呢？ #under_construction</p>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>KD-Tree</title>
+    <url>/2077/03/02/%E7%AE%97%E6%B3%95/KD-Tree/</url>
+    <content><![CDATA[<p>本质：将一个 $k$ 维的立方体内的点压缩到序列上 $O(n^{1-\frac{1}{k}})$ 个不相交区间</p>
+<p>而这个序列就可以用正常方法去维护了</p>
+<p>例题：<a href="https://www.luogu.com.cn/problem/P6783"># P6783 Ynoi2008 rrusq</a></p>
 ]]></content>
       <tags>
         <tag>算法</tag>
@@ -185,18 +77,18 @@
       </tags>
   </entry>
   <entry>
-    <title>Trie</title>
-    <url>/2077/03/02/%E7%AE%97%E6%B3%95/Trie/</url>
-    <content><![CDATA[]]></content>
+    <title>STD</title>
+    <url>/2077/03/02/%E7%AE%97%E6%B3%95/STD/</url>
+    <content><![CDATA[<p>找前 $k$ 大&#x2F;小 元素，用 nth_element() 而非 sort() 会更快</p>
+]]></content>
       <tags>
         <tag>算法</tag>
       </tags>
   </entry>
   <entry>
-    <title>STD</title>
-    <url>/2077/03/02/%E7%AE%97%E6%B3%95/STD/</url>
-    <content><![CDATA[<p>找前 $k$ 大&#x2F;小 元素，用 nth_element() 而非 sort() 会更快</p>
-]]></content>
+    <title>Trie</title>
+    <url>/2077/03/02/%E7%AE%97%E6%B3%95/Trie/</url>
+    <content><![CDATA[]]></content>
       <tags>
         <tag>算法</tag>
       </tags>
@@ -212,9 +104,28 @@
       </tags>
   </entry>
   <entry>
+    <title>二进制</title>
+    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E4%BA%8C%E8%BF%9B%E5%88%B6/</url>
+    <content><![CDATA[<p>相关链接：[[二进制分组]]，[[Trie]]，[[异或]]</p>
+<h2 id="异或-："><a href="#异或-：" class="headerlink" title="[[异或]]："></a>[[异或]]：</h2><h2 id="Trick："><a href="#Trick：" class="headerlink" title="Trick："></a>Trick：</h2><p>类比于前缀 gcd， 利用”优势段”有且仅有 log 段来使用数据结构暴力维护 <a href="https://www.codechef.com/problems/MINXORSEG"># MIN_XOR_SEG</a> ^8ecb0b</p>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>二进制分组</title>
     <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%88%86%E7%BB%84/</url>
     <content><![CDATA[<p>其实与分治本质相同，都是确保两个不同的数都被分至两种不同的集合中过<br><a href="https://www.luogu.com.cn/problem/P5304"># 旅行者</a></p>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>凸包</title>
+    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E5%87%B8%E5%8C%85/</url>
+    <content><![CDATA[<h2 id="Trick："><a href="#Trick：" class="headerlink" title="Trick："></a>Trick：</h2><p>在做涉及到类似向量一类的问题时，考虑将两点化为线，将三点化为面，最后变为凸包去解决 <a href="https://www.luogu.com.cn/problem/P4049">合金</a></p>
 ]]></content>
       <tags>
         <tag>算法</tag>
@@ -225,15 +136,6 @@
     <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E5%87%BD%E6%95%B0%E5%A4%8D%E5%90%88%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p><a href="%E5%87%BD%E6%95%B0%E5%A4%8D%E5%90%88.pptx">经典PPT</a></p>
 <p>本质是通过离线扫描线+权值平衡树将所有需要查询的部分离散到数轴上</p>
-]]></content>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>凸包</title>
-    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E5%87%B8%E5%8C%85/</url>
-    <content><![CDATA[<h2 id="Trick："><a href="#Trick：" class="headerlink" title="Trick："></a>Trick：</h2><p>在做涉及到类似向量一类的问题时，考虑将两点化为线，将三点化为面，最后变为凸包去解决 <a href="https://www.luogu.com.cn/problem/P4049">合金</a></p>
 ]]></content>
       <tags>
         <tag>算法</tag>
@@ -356,20 +258,24 @@
       </tags>
   </entry>
   <entry>
-    <title>二进制</title>
-    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E4%BA%8C%E8%BF%9B%E5%88%B6/</url>
-    <content><![CDATA[<p>相关链接：[[二进制分组]]，[[Trie]]，[[异或]]</p>
-<h2 id="异或-："><a href="#异或-：" class="headerlink" title="[[异或]]："></a>[[异或]]：</h2><h2 id="Trick："><a href="#Trick：" class="headerlink" title="Trick："></a>Trick：</h2><p>类比于前缀 gcd， 利用”优势段”有且仅有 log 段来使用数据结构暴力维护 <a href="https://www.codechef.com/problems/MINXORSEG"># MIN_XOR_SEG</a> ^8ecb0b</p>
+    <title>反射容斥</title>
+    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E5%8F%8D%E5%B0%84%E5%AE%B9%E6%96%A5/</url>
+    <content><![CDATA[<p>可用于求 [[卡特兰数]]</p>
+<p>只能向右或向上，求不能经过两条直线到达某点的方案数 #under_construction </p>
 ]]></content>
       <tags>
         <tag>算法</tag>
       </tags>
   </entry>
   <entry>
-    <title>反射容斥</title>
-    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E5%8F%8D%E5%B0%84%E5%AE%B9%E6%96%A5/</url>
-    <content><![CDATA[<p>可用于求 [[卡特兰数]]</p>
-<p>只能向右或向上，求不能经过两条直线到达某点的方案数 #under_construction </p>
+    <title>后缀数组</title>
+    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<h2 id="Trick"><a href="#Trick" class="headerlink" title="Trick"></a>Trick</h2><p> 统计不同的子串数量，可以用每个后缀的长度减去每个 h[i] 求得</p>
+<p>. LCP有两种求法，你知道嘛</p>
+<ul>
+<li>SA&#x2F;SAM 朴素求</li>
+<li>前缀[[哈希]]+二分(可搭配主席树)</li>
+</ul>
 ]]></content>
       <tags>
         <tag>算法</tag>
@@ -427,20 +333,6 @@
     <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E5%A0%86/</url>
     <content><![CDATA[<h2 id="对于用堆-启发式合并-用于树从下往上查询的题目"><a href="#对于用堆-启发式合并-用于树从下往上查询的题目" class="headerlink" title="对于用堆+[[启发式合并]] 用于树从下往上查询的题目"></a>对于用堆+[[启发式合并]] 用于树从下往上查询的题目</h2><p><a href="https://www.luogu.com.cn/problem/P9168"># 人员调度</a></p>
 <p><a href="https://www.luogu.com.cn/problem/P5290"># 春节十二响</a></p>
-]]></content>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>后缀数组</title>
-    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/</url>
-    <content><![CDATA[<h2 id="Trick"><a href="#Trick" class="headerlink" title="Trick"></a>Trick</h2><p> 统计不同的子串数量，可以用每个后缀的长度减去每个 h[i] 求得</p>
-<p>. LCP有两种求法，你知道嘛</p>
-<ul>
-<li>SA&#x2F;SAM 朴素求</li>
-<li>前缀[[哈希]]+二分(可搭配主席树)</li>
-</ul>
 ]]></content>
       <tags>
         <tag>算法</tag>
@@ -513,6 +405,14 @@
       </tags>
   </entry>
   <entry>
+    <title>平衡树</title>
+    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E5%B9%B3%E8%A1%A1%E6%A0%91/</url>
+    <content><![CDATA[<h2 id="函数复合问题-："><a href="#函数复合问题-：" class="headerlink" title="[[函数复合问题]]："></a>[[函数复合问题]]：</h2>]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>序列分段</title>
     <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E5%BA%8F%E5%88%97%E5%88%86%E6%AE%B5/</url>
     <content><![CDATA[<h5 id="序列分段问题"><a href="#序列分段问题" class="headerlink" title="序列分段问题"></a>序列分段问题</h5><p>形式：一个序列分成多段，每一段按照一定方式计算权值，使总权值取最值。</p>
@@ -562,23 +462,6 @@
       </tags>
   </entry>
   <entry>
-    <title>平衡树</title>
-    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E5%B9%B3%E8%A1%A1%E6%A0%91/</url>
-    <content><![CDATA[<h2 id="函数复合问题-："><a href="#函数复合问题-：" class="headerlink" title="[[函数复合问题]]："></a>[[函数复合问题]]：</h2>]]></content>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>折半搜索</title>
-    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E6%8A%98%E5%8D%8A%E6%90%9C%E7%B4%A2/</url>
-    <content><![CDATA[<p>当 $n$ 很小却以幂次或阶乘的形式存在时，可以考虑折半双向搜索</p>
-]]></content>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>扫描线</title>
     <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E6%89%AB%E6%8F%8F%E7%BA%BF/</url>
     <content><![CDATA[<p>[[扫描线模型.pptx]]</p>
@@ -597,6 +480,15 @@
 <li>最值分治转化为多个矩形的求和，<a href="https://codeforces.com/contest/2009/problem/G3">例</a></li>
 </ul>
 <p>判断为空&#x2F;与0取max可以考虑根据上一次被清空位置分段 <a href="https://zhuanlan.zhihu.com/p/15860052292">美食家</a> </p>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>折半搜索</title>
+    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E6%8A%98%E5%8D%8A%E6%90%9C%E7%B4%A2/</url>
+    <content><![CDATA[<p>当 $n$ 很小却以幂次或阶乘的形式存在时，可以考虑折半双向搜索</p>
 ]]></content>
       <tags>
         <tag>算法</tag>
@@ -641,6 +533,16 @@
       </tags>
   </entry>
   <entry>
+    <title>数论</title>
+    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E6%95%B0%E8%AE%BA/</url>
+    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/716987334"># 数学全家桶</a></p>
+<h2 id="质数相关-："><a href="#质数相关-：" class="headerlink" title="[[质数相关]]："></a>[[质数相关]]：</h2><h2 id="斜率-："><a href="#斜率-：" class="headerlink" title="[[斜率]]："></a>[[斜率]]：</h2><h2 id="拉格朗日插值-："><a href="#拉格朗日插值-：" class="headerlink" title="[[拉格朗日插值]]："></a>[[拉格朗日插值]]：</h2><h2 id="组合数学-："><a href="#组合数学-：" class="headerlink" title="[[组合数学]]："></a>[[组合数学]]：</h2><h2 id="概率与期望-："><a href="#概率与期望-：" class="headerlink" title="[[概率与期望]]："></a>[[概率与期望]]：</h2><h2 id="异或-："><a href="#异或-：" class="headerlink" title="[[异或]]："></a>[[异或]]：</h2><h2 id="矩阵乘法-："><a href="#矩阵乘法-：" class="headerlink" title="[[矩阵乘法]]："></a>[[矩阵乘法]]：</h2><h2 id="卡特兰数-："><a href="#卡特兰数-：" class="headerlink" title="[[卡特兰数]]："></a>[[卡特兰数]]：</h2><h2 id="反射容斥-："><a href="#反射容斥-：" class="headerlink" title="[[反射容斥]]："></a>[[反射容斥]]：</h2><h2 id="BSET定理-："><a href="#BSET定理-：" class="headerlink" title="[[BSET定理]]："></a>[[BSET定理]]：</h2><h2 id="矩阵树定理-："><a href="#矩阵树定理-：" class="headerlink" title="[[矩阵树定理]]："></a>[[矩阵树定理]]：</h2><h2 id="数学相关Trick-："><a href="#数学相关Trick-：" class="headerlink" title="[[数学相关Trick]]："></a>[[数学相关Trick]]：</h2><h2 id="多项式-："><a href="#多项式-：" class="headerlink" title="[[多项式]]："></a>[[多项式]]：</h2><h2 id="复杂度证明-："><a href="#复杂度证明-：" class="headerlink" title="[[复杂度证明]]："></a>[[复杂度证明]]：</h2><p>#important </p>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>数据结构</title>
     <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
     <content><![CDATA[<h2 id="总题单"><a href="#总题单" class="headerlink" title="总题单"></a>总题单</h2><p><a href="https://www.luogu.com.cn/training/466929"># 何为数据结构</a><br><a href="https://www.luogu.com.cn/training/590967"># 何为数据结构二代目</a></p>
@@ -651,10 +553,10 @@
       </tags>
   </entry>
   <entry>
-    <title>数论</title>
-    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E6%95%B0%E8%AE%BA/</url>
-    <content><![CDATA[<p><a href="https://zhuanlan.zhihu.com/p/716987334"># 数学全家桶</a></p>
-<h2 id="质数相关-："><a href="#质数相关-：" class="headerlink" title="[[质数相关]]："></a>[[质数相关]]：</h2><h2 id="斜率-："><a href="#斜率-：" class="headerlink" title="[[斜率]]："></a>[[斜率]]：</h2><h2 id="拉格朗日插值-："><a href="#拉格朗日插值-：" class="headerlink" title="[[拉格朗日插值]]："></a>[[拉格朗日插值]]：</h2><h2 id="组合数学-："><a href="#组合数学-：" class="headerlink" title="[[组合数学]]："></a>[[组合数学]]：</h2><h2 id="概率与期望-："><a href="#概率与期望-：" class="headerlink" title="[[概率与期望]]："></a>[[概率与期望]]：</h2><h2 id="异或-："><a href="#异或-：" class="headerlink" title="[[异或]]："></a>[[异或]]：</h2><h2 id="矩阵乘法-："><a href="#矩阵乘法-：" class="headerlink" title="[[矩阵乘法]]："></a>[[矩阵乘法]]：</h2><h2 id="卡特兰数-："><a href="#卡特兰数-：" class="headerlink" title="[[卡特兰数]]："></a>[[卡特兰数]]：</h2><h2 id="反射容斥-："><a href="#反射容斥-：" class="headerlink" title="[[反射容斥]]："></a>[[反射容斥]]：</h2><h2 id="BSET定理-："><a href="#BSET定理-：" class="headerlink" title="[[BSET定理]]："></a>[[BSET定理]]：</h2><h2 id="矩阵树定理-："><a href="#矩阵树定理-：" class="headerlink" title="[[矩阵树定理]]："></a>[[矩阵树定理]]：</h2><h2 id="数学相关Trick-："><a href="#数学相关Trick-：" class="headerlink" title="[[数学相关Trick]]："></a>[[数学相关Trick]]：</h2><h2 id="多项式-："><a href="#多项式-：" class="headerlink" title="[[多项式]]："></a>[[多项式]]：</h2><h2 id="复杂度证明-："><a href="#复杂度证明-：" class="headerlink" title="[[复杂度证明]]："></a>[[复杂度证明]]：</h2><p>#important </p>
+    <title>斜率</title>
+    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E6%96%9C%E7%8E%87/</url>
+    <content><![CDATA[<p>相关链接：[[计算几何]]，[[凸包]]，[[斜率优化]]，[[数论]]，[[李超线段树]] </p>
+<h2 id="Trick"><a href="#Trick" class="headerlink" title="Trick"></a>Trick</h2><p>$$等差数列 \Rightarrow 李超树 \Rightarrow 斜率优化(凸包)$$</p>
 ]]></content>
       <tags>
         <tag>算法</tag>
@@ -670,38 +572,9 @@
       </tags>
   </entry>
   <entry>
-    <title>最小生成树</title>
-    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/</url>
-    <content><![CDATA[<h2 id="Trick"><a href="#Trick" class="headerlink" title="Trick"></a>Trick</h2><p>对于一个图 $G$ ，将其分割为若干个点集使得 $S_1 \cup S_2 … \cup S_n&#x3D;G$  ，对其中的每个 $S$ 求解出最小生成森林 ，删去非最小生成森林的边，再对 $S_1,S_2,S_3$ 这个整体求解出最小生成树，就能得到 $G$ 的最小生成树，配合一些奇奇怪怪的分治算法即可，<a href="https://www.luogu.com.cn/problem/AT_cf17_final_j"># AT_cf17_final_j Tree MST</a></p>
-]]></content>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>杂项Trick</title>
     <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E6%9D%82%E9%A1%B9Trick/</url>
     <content><![CDATA[<h2 id="折半搜索-："><a href="#折半搜索-：" class="headerlink" title="[[折半搜索]]："></a>[[折半搜索]]：</h2><h2 id="异或-："><a href="#异或-：" class="headerlink" title="[[异或]]："></a>[[异或]]：</h2><h2 id="二分答案-："><a href="#二分答案-：" class="headerlink" title="[[二分答案]]："></a>[[二分答案]]：</h2><h2 id="启发式合并-："><a href="#启发式合并-：" class="headerlink" title="[[启发式合并]]："></a>[[启发式合并]]：</h2><h2 id="STD-："><a href="#STD-：" class="headerlink" title="[[STD]]："></a>[[STD]]：</h2><h2 id="随机化-："><a href="#随机化-：" class="headerlink" title="[[随机化]]："></a>[[随机化]]：</h2><h2 id="Trick"><a href="#Trick" class="headerlink" title="Trick"></a>Trick</h2>]]></content>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>李超线段树</title>
-    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E6%9D%8E%E8%B6%85%E7%BA%BF%E6%AE%B5%E6%A0%91/</url>
-    <content><![CDATA[<p>致永远的SP李超线段树</p>
-<p>李超线段树也可以用于维护 <a href="https://www.luogu.com.cn/problem/P5508">全局点最值</a>，达到类似于堆的效果，用于最短路</p>
-]]></content>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>斜率</title>
-    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E6%96%9C%E7%8E%87/</url>
-    <content><![CDATA[<p>相关链接：[[计算几何]]，[[凸包]]，[[斜率优化]]，[[数论]]，[[李超线段树]] </p>
-<h2 id="Trick"><a href="#Trick" class="headerlink" title="Trick"></a>Trick</h2><p>$$等差数列 \Rightarrow 李超树 \Rightarrow 斜率优化(凸包)$$</p>
-]]></content>
       <tags>
         <tag>算法</tag>
       </tags>
@@ -720,10 +593,19 @@
       </tags>
   </entry>
   <entry>
-    <title>树分治</title>
-    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E6%A0%91%E5%88%86%E6%B2%BB/</url>
-    <content><![CDATA[<h2 id="点分治"><a href="#点分治" class="headerlink" title="点分治"></a>点分治</h2><h2 id="边分治"><a href="#边分治" class="headerlink" title="边分治"></a>边分治</h2><p>对边分治无用论的一记 <a href="https://www.luogu.com.cn/problem/CF1019E">重拳</a></p>
-<p>边分的好处就在于只需要处理边两端子树的情况，而并不需要考虑多子树的合并问题</p>
+    <title>最小生成树</title>
+    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/</url>
+    <content><![CDATA[<h2 id="Trick"><a href="#Trick" class="headerlink" title="Trick"></a>Trick</h2><p>对于一个图 $G$ ，将其分割为若干个点集使得 $S_1 \cup S_2 … \cup S_n&#x3D;G$  ，对其中的每个 $S$ 求解出最小生成森林 ，删去非最小生成森林的边，再对 $S_1,S_2,S_3$ 这个整体求解出最小生成树，就能得到 $G$ 的最小生成树，配合一些奇奇怪怪的分治算法即可，<a href="https://www.luogu.com.cn/problem/AT_cf17_final_j"># AT_cf17_final_j Tree MST</a></p>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>李超线段树</title>
+    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E6%9D%8E%E8%B6%85%E7%BA%BF%E6%AE%B5%E6%A0%91/</url>
+    <content><![CDATA[<p>致永远的SP李超线段树</p>
+<p>李超线段树也可以用于维护 <a href="https://www.luogu.com.cn/problem/P5508">全局点最值</a>，达到类似于堆的效果，用于最短路</p>
 ]]></content>
       <tags>
         <tag>算法</tag>
@@ -737,6 +619,29 @@
 <h2 id="Trick"><a href="#Trick" class="headerlink" title="Trick"></a>Trick</h2><p>如何判断是否为 <strong>一棵树</strong>，同时满足无环(LCT&#x2F;并查集)与点数-边数&#x3D;1 </p>
 <p>给出一个树上的点集，问该集合中所有点中的最优点，且所有点只会 <strong>整体</strong> 向上跳时，若任意一点作为根的子树中的点一定不优时，则可以将这部分点剔除出，剩余点跳跃是均摊 $O(n)$ 的 <a href="https://www.luogu.com.cn/problem/P6779"># P6779  rla1rmdq</a></p>
 <p>对于树上多条路径，找其中两条使得其的交…的问题，可以考虑树链剖分，在每条链上考虑经过这条链的路径在这段上的贡献 <a href="https://www.luogu.com.cn/problem/CF704E"># Iron Man</a></p>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>树分治</title>
+    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E6%A0%91%E5%88%86%E6%B2%BB/</url>
+    <content><![CDATA[<h2 id="点分治"><a href="#点分治" class="headerlink" title="点分治"></a>点分治</h2><h2 id="边分治"><a href="#边分治" class="headerlink" title="边分治"></a>边分治</h2><p>对边分治无用论的一记 <a href="https://www.luogu.com.cn/problem/CF1019E">重拳</a></p>
+<p>边分的好处就在于只需要处理边两端子树的情况，而并不需要考虑多子树的合并问题</p>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>概率与期望</title>
+    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E6%A6%82%E7%8E%87%E4%B8%8E%E6%9C%9F%E6%9C%9B/</url>
+    <content><![CDATA[<p>概率是顺推，而期望需要逆推 </p>
+<h2 id="连续型期望"><a href="#连续型期望" class="headerlink" title="连续型期望"></a>连续型期望</h2><p><a href="https://zhuanlan.zhihu.com/p/717865570">Random Max</a></p>
+<h2 id="转换Trick"><a href="#转换Trick" class="headerlink" title="转换Trick"></a>转换Trick</h2><p>对于求期望的问题，可以转换为求每个代价出现的概率乘上代价的和</p>
+<p>对于状态设计转移阶段较为麻烦的题目，可以考虑爆列每个状态的转移，然后跑高斯消元</p>
+<p>对于高消观察它的图上性质，树形结构可以考虑自下而上的消元</p>
 ]]></content>
       <tags>
         <tag>算法</tag>
@@ -852,6 +757,17 @@
       </tags>
   </entry>
   <entry>
+    <title>线段树合并</title>
+    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6/</url>
+    <content><![CDATA[<p>两种实现方式：朴素合并( $O(nlogn)$ ) 与 <a href="$O(nlog%5E2n)$">[启发式合并]</a></p>
+<p>朴素合并例题：<br><a href="https://www.luogu.com.cn/problem/P5298"># [PKUWC2018] Minimax </a></p>
+<p>李超树+线段树合并也是 $O(nlogn)$ 的，前提是所有直线都为全局直线(总结点数与直线数相同 $O(n)$ )</p>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>线段覆盖</title>
     <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E7%BA%BF%E6%AE%B5%E8%A6%86%E7%9B%96/</url>
     <content><![CDATA[<h2 id="线段覆盖类问题"><a href="#线段覆盖类问题" class="headerlink" title="线段覆盖类问题"></a>线段覆盖类问题</h2><ul>
@@ -874,17 +790,6 @@
 </ol>
 </li>
 </ul>
-]]></content>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>线段树合并</title>
-    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%90%88%E5%B9%B6/</url>
-    <content><![CDATA[<p>两种实现方式：朴素合并( $O(nlogn)$ ) 与 <a href="$O(nlog%5E2n)$">[启发式合并]</a></p>
-<p>朴素合并例题：<br><a href="https://www.luogu.com.cn/problem/P5298"># [PKUWC2018] Minimax </a></p>
-<p>李超树+线段树合并也是 $O(nlogn)$ 的，前提是所有直线都为全局直线(总结点数与直线数相同 $O(n)$ )</p>
 ]]></content>
       <tags>
         <tag>算法</tag>
@@ -974,30 +879,6 @@
     <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E8%B4%AA%E5%BF%83/</url>
     <content><![CDATA[<p>[[线段覆盖]]</p>
 <h2 id="反悔贪心"><a href="#反悔贪心" class="headerlink" title="反悔贪心"></a>反悔贪心</h2><p><a href="https://www.luogu.com.cn/problem/P3620"># 数据备份</a></p>
-]]></content>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>连通性相关</title>
-    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E8%BF%9E%E9%80%9A%E6%80%A7%E7%9B%B8%E5%85%B3/</url>
-    <content><![CDATA[<h2 id="2-SAT"><a href="#2-SAT" class="headerlink" title="2-SAT"></a>2-SAT</h2><p>当遇到某些选择只有两种变化，问合法方案的题目，考虑使用 2-sat解决 <a href="https://www.luogu.com.cn/problem/P6965">毛子老哥重量级建图技巧题</a> </p>
-<p>通过向自己的反连边的方式代表某个点不能被选择 </p>
-<h2 id="环"><a href="#环" class="headerlink" title="环"></a>环</h2><p>无向图无权图上找最小环，可以考虑枚举每个点作为环上一端点，然后bfs处理 $dep$ ，在发现已访问的节点后更新答案，保证不走重复边即可，这样子跑一遍是 $O(n+m)$ 的，当发现实际环的代表元端点数量很少时，可以暴力枚举 <a href="https://www.luogu.com.cn/problem/CF1325E"># CF1325E Ehab’s REAL Number Theory Problem</a></p>
-]]></content>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>概率与期望</title>
-    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E6%A6%82%E7%8E%87%E4%B8%8E%E6%9C%9F%E6%9C%9B/</url>
-    <content><![CDATA[<p>概率是顺推，而期望需要逆推 </p>
-<h2 id="连续型期望"><a href="#连续型期望" class="headerlink" title="连续型期望"></a>连续型期望</h2><p><a href="https://zhuanlan.zhihu.com/p/717865570">Random Max</a></p>
-<h2 id="转换Trick"><a href="#转换Trick" class="headerlink" title="转换Trick"></a>转换Trick</h2><p>对于求期望的问题，可以转换为求每个代价出现的概率乘上代价的和</p>
-<p>对于状态设计转移阶段较为麻烦的题目，可以考虑爆列每个状态的转移，然后跑高斯消元</p>
-<p>对于高消观察它的图上性质，树形结构可以考虑自下而上的消元</p>
 ]]></content>
       <tags>
         <tag>算法</tag>
@@ -1670,11 +1551,11 @@
       </tags>
   </entry>
   <entry>
-    <title>随机化</title>
-    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E9%9A%8F%E6%9C%BA%E5%8C%96/</url>
-    <content><![CDATA[<p>任意取出树上的一条路径，有大于 $\frac{1}{2}$ 的概率经过树的重心，可以通过此乱搞 <a href="https://qoj.ac/problem/5029"># 在路上</a></p>
-<p>当只需要提取出一个序列的中位数&#x2F;kth元素时，可以考虑像 nth_element 一样随机一个节点，然后分治，时间复杂度是期望 $O(n)$ 的 <a href="https://qoj.ac/problem/5029"># 在路上</a></p>
-<p>当图上问题转化为二分图问题更好解决时，可以考虑将图随机染色 <a href="https://www.luogu.com.cn/problem/CF1310D"># Tourism</a> ，<a href="https://loj.ac/p/3400"># 「2020-2021 集训队作业」Storm</a></p>
+    <title>连通性相关</title>
+    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E8%BF%9E%E9%80%9A%E6%80%A7%E7%9B%B8%E5%85%B3/</url>
+    <content><![CDATA[<h2 id="2-SAT"><a href="#2-SAT" class="headerlink" title="2-SAT"></a>2-SAT</h2><p>当遇到某些选择只有两种变化，问合法方案的题目，考虑使用 2-sat解决 <a href="https://www.luogu.com.cn/problem/P6965">毛子老哥重量级建图技巧题</a> </p>
+<p>通过向自己的反连边的方式代表某个点不能被选择 </p>
+<h2 id="环"><a href="#环" class="headerlink" title="环"></a>环</h2><p>无向图无权图上找最小环，可以考虑枚举每个点作为环上一端点，然后bfs处理 $dep$ ，在发现已访问的节点后更新答案，保证不走重复边即可，这样子跑一遍是 $O(n+m)$ 的，当发现实际环的代表元端点数量很少时，可以暴力枚举 <a href="https://www.luogu.com.cn/problem/CF1325E"># CF1325E Ehab’s REAL Number Theory Problem</a></p>
 ]]></content>
       <tags>
         <tag>算法</tag>
@@ -1696,6 +1577,17 @@
       </tags>
   </entry>
   <entry>
+    <title>随机化</title>
+    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E9%9A%8F%E6%9C%BA%E5%8C%96/</url>
+    <content><![CDATA[<p>任意取出树上的一条路径，有大于 $\frac{1}{2}$ 的概率经过树的重心，可以通过此乱搞 <a href="https://qoj.ac/problem/5029"># 在路上</a></p>
+<p>当只需要提取出一个序列的中位数&#x2F;kth元素时，可以考虑像 nth_element 一样随机一个节点，然后分治，时间复杂度是期望 $O(n)$ 的 <a href="https://qoj.ac/problem/5029"># 在路上</a></p>
+<p>当图上问题转化为二分图问题更好解决时，可以考虑将图随机染色 <a href="https://www.luogu.com.cn/problem/CF1310D"># Tourism</a> ，<a href="https://loj.ac/p/3400"># 「2020-2021 集训队作业」Storm</a></p>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>非重复元素配对问题</title>
     <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E9%9D%9E%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0%E9%85%8D%E5%AF%B9%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p><a href="https://www.luogu.com.cn/problem/P3586"># LOG</a></p>
@@ -1706,20 +1598,117 @@
       </tags>
   </entry>
   <entry>
-    <title>交变电流</title>
-    <url>/2077/03/02/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%89%A9%E7%90%86/%E4%BA%A4%E5%8F%98%E7%94%B5%E6%B5%81/</url>
-    <content><![CDATA[]]></content>
+    <title>AT_awtf2024_d Almost Bubble Sort 题解</title>
+    <url>/2077/03/02/%E9%A2%98%E8%A7%A3/AT_awtf2024_d%20Almost%20Bubble%20Sort%20%E9%A2%98%E8%A7%A3/</url>
+    <content><![CDATA[<p>考虑这么证明：</p>
+<p>将所有点绘制到一个坐标系上，若一个点被选择了，则我们称其为 $1$ </p>
+<p>结论：当我们有 $i &lt; j,p_{i} &gt; p_{j}$ 且 $i$ 被选择，则 $j$ 一定被选择</p>
+<p>我们考虑这么证明：若 $j$ 被选择，则一定能够构造出一种新的方案使得其比当前方案更优</p>
+<p>使用反证法，不妨设当前是最优答案且答案中存在两位置 $i,j$ 使得 $i&lt;j,p_i&gt;p_j$ 且 $i$ 选 $j$ 不选</p>
+<p>不妨找到其中使得 $p_j-p_i$ 最小的 $i,j$ ，那么他就会满足</p>
+<ul>
+<li>$p_i,p_j$ 中间没有比 $p_i$ 小且被选择的点</li>
+<li>$p_i,p_j$ 中间没有比 $p_j$ 大且未被选择的点</li>
+<li>没有值在 $i，j$ 中间的元素</li>
+</ul>
+<p>发现这样就将整个平面分割为了九个部分，我们分别将其称为</p>
+<p>$$\begin{array}{a|a|a|a}<br>\hline 1 &amp; 2 &amp; 3 \<br>\hline 4 &amp; 5 &amp; 6 \<br>\hline 7 &amp; 8 &amp; 9 \<br>\hline<br>\end{array}$$<br>考虑让 $i,j$ 选择反转，计算每一部分的贡献</p>
+<ul>
+<li>$(1,0),1 \rightarrow 0$</li>
+<li>$(4,0),1 \rightarrow 0$</li>
+<li>$(7,0),0 \rightarrow 0$</li>
+<li>$(2,0),1 \rightarrow 0$</li>
+<li>$(8,0),1 \rightarrow 1$</li>
+<li>$(3,0),1 \rightarrow 1$</li>
+<li>$(1,1),2 \rightarrow 2$</li>
+<li>$(7,1),1 \rightarrow 1$</li>
+<li>$(2,1),1 \rightarrow 1$</li>
+<li>$(8,1),1 \rightarrow 0$</li>
+<li>$(3,1),0 \rightarrow 0$</li>
+<li>$(6,1),1 \rightarrow 0$</li>
+<li>$(9,1),1 \rightarrow 1$</li>
+</ul>
+<p>然后你发现每一位要么不变，要么变小，再加上本次操作后一定会 $-1$ ，于是我们就构造出了一种方案使得答案比当前答案更小，与假设相悖，所以得证</p>
+<p>故最终答案中一定不存在 $i&lt;j,p_i&gt;p_j$ 且 $i$ 被选择的情况，故我们可以推出当 $i$ 被选择时，$j$ 一定选择  </p>
+<p>然后我们就可以拆贡献，考虑计算当一个点被选择时能够产生的贡献</p>
+<p>此时以此为原点绘制平面直角坐标系，则第一象限的 $0$ 点会产生 $1$ 的贡献，第二象限的 $0$ 会产生 $-1$ 的贡献，第三象限的 $1$ 会产生 $-1$ 的贡献，第四象限的 $1$ 会产生 $1$ 的贡献</p>
+<p>这样要同时讨论 $0,1$ 两种点，有点麻烦，不妨在一开始就加上每个点一二象限的贡献，转化成一三象限会产生 $1$ 的贡献，二四象限会产生 $-1$ 的贡献</p>
+]]></content>
       <tags>
-        <tag>文化课</tag>
-        <tag>物理</tag>
+        <tag>题解</tag>
       </tags>
   </entry>
   <entry>
-    <title>分子速率分布规律</title>
-    <url>/2077/03/02/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%89%A9%E7%90%86/%E5%88%86%E5%AD%90%E9%80%9F%E7%8E%87%E5%88%86%E5%B8%83%E8%A7%84%E5%BE%8B/</url>
-    <content><![CDATA[<p>温度越高，热运动越剧烈，峰值越靠右，但不是所有分子的运动速率都加快</p>
-<p>无论温度高低，速率很大，速率很小的永远都是少数</p>
+    <title>AT_cf17_final_j Tree MST 题解</title>
+    <url>/2077/03/02/%E9%A2%98%E8%A7%A3/AT_cf17_final_j%20Tree%20MST%20%E9%A2%98%E8%A7%A3/</url>
+    <content><![CDATA[<p>考虑使用 b 算法解决</p>
+<p>问题就变成了：对于一个集合 $S$ ，我如何去寻找一个点 $p$ 使得 </p>
+<p>$$\min_{s \in S}w_{p}+w_{s}+dis_{p,s} \le \min_{s\in S,j\not \in S \wedge j \not &#x3D; p}w_{s}+w_{j}+dis_{s,j}$$<br>我们称每个节点所属的集合为他的颜色</p>
+<p>考虑启发式合并，对树上每一个点 $u$ 用一个 $set$  维护子树内每种颜色的点的 $dis_{u,p}+w_{p}$ 的最小值，额外维护所有颜色中的最小值和次小值，启发式合并的同时统计每种颜色的答案即可</p>
+<p>发现其实不用启发式合并，用类似树形dp的方式上下 dfs 即可</p>
 ]]></content>
+      <tags>
+        <tag>题解</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P4694 PA 2013 Raper</title>
+    <url>/2077/03/02/%E9%A2%98%E8%A7%A3/P4694%20PA%202013%20Raper/</url>
+    <content><![CDATA[<p>考虑将每次的决策分为两部分：从左往右的以及从右往左的</p>
+<p>额外记录一个 $f_i,g_i$ 表示 $a_i,b_i$ 是否被选择</p>
+<p>对于从左往右的，直接线段树上分治即可</p>
+<p>对于从右往左的，我们考虑记录一个 $h_i$ 表示 $i+1$ 到 $i$ 的反向边的流量</p>
+<p>考虑记录区间前缀的最大联通 $b_i$ ，区间后缀的最大联通 $a_i$ ，区间内最大的从右到左段的大小，区间从右往左方案中的最大值</p>
+<p>因为区间内 $h_i$ 非负，所以只需要记录区间内 $Min$ 为 $0$ 以及 $Min$ 非 $0$ 的情况即可</p>
+]]></content>
+      <tags>
+        <tag>题解</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P7486 「Stoi2031」彩虹 题解</title>
+    <url>/2077/03/02/%E9%A2%98%E8%A7%A3/P7486%20%E3%80%8CStoi2031%E3%80%8D%E5%BD%A9%E8%99%B9%20%E9%A2%98%E8%A7%A3/</url>
+    <content><![CDATA[<p>没啥好说的，暴解</p>
+<p>$$\begin{eqnarray}<br>&amp;&amp; \prod_{i&#x3D;l}^{r}\prod_{j&#x3D;l}^{r} \frac{ij}{gcd(i,j)}^{\frac{ij}{gcd(i,j)}} \<br>\end{eqnarray}$$<br>设 $f(x,y)&#x3D;\prod_{i&#x3D;1}^{x}\prod_{j&#x3D;1}^{y} \frac{ij}{gcd(i,j)}^{\frac{ij}{gcd(i,j)}}$</p>
+<p>那么答案则为</p>
+<p>$$\frac{f(r,r)f(l-1,l-1)}{f(l-1,r)f(r,l-1)}$$</p>
+<p>$$\begin{eqnarray}</p>
+<p>f(x,y)&amp;&#x3D;&amp;\prod_{i&#x3D;1}^{x}\prod_{j&#x3D;1}^{y} \frac{ij}{gcd(i,j)}^{\frac{ij}{gcd(i,j)}}\<br>&amp;&#x3D;&amp;\prod_{d&#x3D;1}^{y}\prod_{i&#x3D;1}^{x}\prod_{j&#x3D;1}^{y} \frac{ij}{d}^{\frac{ij}{d}[gcd(i,j)&#x3D;d]}\<br>&amp;&#x3D;&amp;\prod_{d&#x3D;1}^{y}\prod_{i&#x3D;1}^{\left\lfloor\frac{x}{d}\right\rfloor}\prod_{j&#x3D;1}^{\left\lfloor\frac{y}{d}\right\rfloor} dij^{dij[gcd(i,j)&#x3D;1]}\<br>&amp;&#x3D;&amp;\prod_{d&#x3D;1}^{y}\prod_{i&#x3D;1}^{\left\lfloor\frac{x}{d}\right\rfloor}\prod_{j&#x3D;1}^{\left\lfloor\frac{y}{d}\right\rfloor} dij^{dij\sum\limits_{p \mid gcd(i,j)}\mu(p)}\<br>&amp;&#x3D;&amp;\prod_{d&#x3D;1}^{y}\prod_{i&#x3D;1}^{\left\lfloor\frac{x}{d}\right\rfloor}\prod_{j&#x3D;1}^{\left\lfloor\frac{y}{d}\right\rfloor} dij^{dij\sum\limits_{p&#x3D;1}^{\left\lfloor \frac{y}{d} \right\rfloor}\mu(p)[p \mid i][\mid j]}\<br>&amp;&#x3D;&amp;\prod_{d&#x3D;1}^{y}\prod\limits_{p&#x3D;1}^{\left\lfloor \frac{y}{d} \right\rfloor}\prod_{i&#x3D;1}^{\left\lfloor\frac{x}{dp}\right\rfloor}\prod_{j&#x3D;1}^{\left\lfloor\frac{y}{dp}\right\rfloor} (ijdp^2)^{ijdp^2\mu(p)}\<br>&amp;&#x3D;&amp;\prod_{T&#x3D;1}^{y}\prod\limits_{p\mid T}\prod_{i&#x3D;1}^{\left\lfloor\frac{x}{T}\right\rfloor}\prod_{j&#x3D;1}^{\left\lfloor\frac{y}{T}\right\rfloor} (ijTp)^{ijTp\mu(p)}\<br>&amp;&#x3D;&amp;\prod_{T&#x3D;1}^{y}\prod\limits_{p\mid T}\left(\prod_{i&#x3D;1}^{\left\lfloor\frac{x}{T}\right\rfloor}\prod_{j&#x3D;1}^{\left\lfloor\frac{y}{T}\right\rfloor} (ij)^{ij}\times(Tp)^{S(\left\lfloor\frac{x}{T}\right\rfloor)S(\left\lfloor\frac{y}{T}\right\rfloor)}\right)^{Tp\mu(p)}\</p>
+<p>\end{eqnarray}$$<br>不妨设 $g(x,y)&#x3D;\prod_{i&#x3D;1}^{x}\prod_{j&#x3D;1}^{y} (ij)^{ij},D(x)&#x3D;\prod_{i&#x3D;1}^{x}i^i$ ，那么有</p>
+<p>$$g(x,y)&#x3D;D(x)^{S_{y}} \times D(y)^{S_{x}}$$<br>将其替换</p>
+<p>$$\begin{eqnarray}<br>&amp;&#x3D;&amp;\prod_{T&#x3D;1}^{y}\prod\limits_{p\mid T}\left(g\left(\left\lfloor \frac{x}{T} \right\rfloor,\left\lfloor \frac{y}{T} \right\rfloor\right) \times(Tp)^{S(\left\lfloor\frac{x}{T}\right\rfloor)S(\left\lfloor\frac{y}{T}\right\rfloor)}\right)^{Tp\mu(p)}\</p>
+<p>\end{eqnarray}$$<br>不妨设 $h(x)&#x3D;\sum_{d \mid x}d\mu(d),w(x)&#x3D;\prod_{d \mid x}d^{d\mu(d)}$，那么有</p>
+<p>$$\begin{eqnarray}<br>&amp;&#x3D;&amp;\prod_{T&#x3D;1}^{y}\left(g\left(\left\lfloor \frac{x}{T} \right\rfloor,\left\lfloor \frac{y}{T} \right\rfloor\right)^{Th(T)}(T^{h(T)}\prod\limits_{p\mid T}p^{p\mu(p)})^{TS(\left\lfloor\frac{x}{T}\right\rfloor)S(\left\lfloor\frac{y}{T}\right\rfloor)}\right)\<br>&amp;&#x3D;&amp;\prod_{T&#x3D;1}^{y}g\left(\left\lfloor \frac{x}{T} \right\rfloor,\left\lfloor \frac{y}{T} \right\rfloor\right)^{Th(T)}\left(T^{h(T)}w(T)\right)^{TS(\left\lfloor\frac{x}{T}\right\rfloor)S(\left\lfloor\frac{y}{T}\right\rfloor)}\</p>
+<p>\end{eqnarray}$$<br>最后再设 $E(x)&#x3D;\left(T^{h(T)}w(T)\right)^T,H(x)&#x3D;Th(T)$ ，就变成了</p>
+<p>$$\begin{eqnarray}</p>
+<p>&amp;&#x3D;&amp;\prod_{T&#x3D;1}^{y}g\left(\left\lfloor \frac{x}{T} \right\rfloor,\left\lfloor \frac{y}{T} \right\rfloor\right)^{Th(T)}E(T)^{S(\left\lfloor\frac{x}{T}\right\rfloor)S(\left\lfloor\frac{y}{T}\right\rfloor)}\</p>
+<p>\end{eqnarray}$$</p>
+<p>于是我们需要预处理以下东西</p>
+<p>$h(i),E(i)$ 的前缀和</p>
+<p>$D(i),w(i)$</p>
+]]></content>
+      <tags>
+        <tag>题解</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P7907 Ynoi2005 rmscne 题解</title>
+    <url>/2077/03/02/%E9%A2%98%E8%A7%A3/P7907%20Ynoi2005%20rmscne%20%E9%A2%98%E8%A7%A3/</url>
+    <content><![CDATA[<p>很妙的思路转换</p>
+<p>显然扫描线，一个很自然的想法是用数据结构维护 $f_i$ 表示左端点为 $i$ 时…的答案，然后单点查询，但是我们发现当 $l$ 不同时，其对应的答案其实也是不好维护的</p>
+<p>考虑这么转换，假设查询区间为 $[l,r]$ ，其内部有一个子区间 $[l’,r’]$ ，那么合法的 $l’$ 一定是 $[l,r]$ 的一段前缀，发现通过这么转化可以成功的将单点查询转化为区间查询</p>
+<p>这样有什么好处呢？首先我们可以二分得到这个前缀的具体区间，接下来对于这个前缀内的每个 $l’$ 一定能够找到一个对应的 $r’$ 使得其合法，所以说即使对于不同的 $l$ ，只要其被包含在前缀区间内，那么他的答案都是相同的，记其为 $f_i$ ，那么我们最后要求的其实就是</p>
+<p>$$\min_{p \in [l_e,r_e]}f_{p}-p+1$$<br>然后我们发现当我们对应的 $r \leftarrow r+1$ 时，我们只需要更新 $i \in [las_{a_r},r]$ 的 $f_{i}\leftarrow r$ 即可 </p>
+<p>然后就做完了</p>
+]]></content>
+      <tags>
+        <tag>题解</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>交变电流</title>
+    <url>/2077/03/02/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%89%A9%E7%90%86/%E4%BA%A4%E5%8F%98%E7%94%B5%E6%B5%81/</url>
+    <content><![CDATA[]]></content>
       <tags>
         <tag>文化课</tag>
         <tag>物理</tag>
@@ -1739,12 +1728,10 @@
       </tags>
   </entry>
   <entry>
-    <title>扩散现象与布朗运动</title>
-    <url>/2077/03/02/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%89%A9%E7%90%86/%E6%89%A9%E6%95%A3%E7%8E%B0%E8%B1%A1%E4%B8%8E%E5%B8%83%E6%9C%97%E8%BF%90%E5%8A%A8/</url>
-    <content><![CDATA[<h2 id="布朗运动"><a href="#布朗运动" class="headerlink" title="布朗运动"></a>布朗运动</h2><p>定义：悬浮在液体&#x2F;气体中的微粒&#x2F;颗粒所做的无规则运动</p>
-<p>根本原因：液体或气体分子对微粒的无规则热运动(宏观运动，可以被观察到)</p>
-<p>影响因素：温度越高越显著</p>
-<p>意义：间接的反映了气体或液体分紫的无规则运动</p>
+    <title>分子速率分布规律</title>
+    <url>/2077/03/02/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%89%A9%E7%90%86/%E5%88%86%E5%AD%90%E9%80%9F%E7%8E%87%E5%88%86%E5%B8%83%E8%A7%84%E5%BE%8B/</url>
+    <content><![CDATA[<p>温度越高，热运动越剧烈，峰值越靠右，但不是所有分子的运动速率都加快</p>
+<p>无论温度高低，速率很大，速率很小的永远都是少数</p>
 ]]></content>
       <tags>
         <tag>文化课</tag>
@@ -1758,6 +1745,19 @@
 <p>那么对于一段导体，设其内部的自由电子电荷量为 $Q’$ ，那么有每秒运动了导体中 $\frac{I}{Q’}$ 的电子，由于导体质地均匀，故这部分电子运动了 $\frac{I}{Q’}L$ 米每秒，故电子的运动速率为 $\frac{I}{Q’}L$</p>
 <p>那么最后面受到的安培力为其所有自由电子受到的洛伦兹力的总和，即</p>
 <p>$$Q’ \frac{I}{Q’}LB &#x3D;BIL$$</p>
+]]></content>
+      <tags>
+        <tag>文化课</tag>
+        <tag>物理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>扩散现象与布朗运动</title>
+    <url>/2077/03/02/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%89%A9%E7%90%86/%E6%89%A9%E6%95%A3%E7%8E%B0%E8%B1%A1%E4%B8%8E%E5%B8%83%E6%9C%97%E8%BF%90%E5%8A%A8/</url>
+    <content><![CDATA[<h2 id="布朗运动"><a href="#布朗运动" class="headerlink" title="布朗运动"></a>布朗运动</h2><p>定义：悬浮在液体&#x2F;气体中的微粒&#x2F;颗粒所做的无规则运动</p>
+<p>根本原因：液体或气体分子对微粒的无规则热运动(宏观运动，可以被观察到)</p>
+<p>影响因素：温度越高越显著</p>
+<p>意义：间接的反映了气体或液体分紫的无规则运动</p>
 ]]></content>
       <tags>
         <tag>文化课</tag>
@@ -2005,6 +2005,25 @@
       </tags>
   </entry>
   <entry>
+    <title>核糖？核苷？核糖核苷？</title>
+    <url>/2077/03/02/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%94%9F%E7%89%A9/%E6%A0%B8%E7%B3%96%EF%BC%9F%E6%A0%B8%E8%8B%B7%EF%BC%9F%E6%A0%B8%E7%B3%96%E6%A0%B8%E8%8B%B7%EF%BC%9F/</url>
+    <content><![CDATA[<p>左：脱氧核糖<br>右：核糖</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">C(C=O)[C@@H]([C@@H](CO)O)O</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">C([C@H]([C@H]([C@H](C=O)O)O)O)O</span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>核糖</strong>与<strong>碱基</strong>之间成键，形成<strong>核糖核苷</strong><br><strong>脱氧核糖</strong>与<strong>碱基</strong>之间成键，形成<strong>脱氧核糖核苷</strong></p>
+<p>两者统称为 <strong>核苷</strong></p>
+<hr>
+<p><strong>核糖核苷</strong>与<strong>磷酸基团</strong>之间成键，形成<strong>核糖核苷酸</strong><br><strong>脱氧核糖核苷</strong>与<strong>磷酸基团</strong>之间成键，形成<strong>脱氧核糖核苷酸</strong></p>
+<p>两者统称为 <strong>核苷酸</strong></p>
+<hr>
+<p>多个<strong>核糖核苷酸</strong>用化学键相连，得到<strong>核糖核酸</strong>(RNA)<br>多个<strong>脱氧核糖核苷酸</strong>用化学键相连，得到<strong>脱氧核糖核酸</strong>(DNA)</p>
+]]></content>
+      <tags>
+        <tag>文化课</tag>
+        <tag>生物</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>植物细胞工程</title>
     <url>/2077/03/02/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%94%9F%E7%89%A9/%E6%A4%8D%E7%89%A9%E7%BB%86%E8%83%9E%E5%B7%A5%E7%A8%8B/</url>
     <content><![CDATA[<h3 id="植物组织培养："><a href="#植物组织培养：" class="headerlink" title="植物组织培养："></a>植物组织培养：</h3><p>将离体的植物器官，组织或细胞等，培养在人工配置的培养基上，给予适宜的条件，诱导其成为一棵完整植株的技术</p>
@@ -2041,43 +2060,12 @@
       </tags>
   </entry>
   <entry>
-    <title>核糖？核苷？核糖核苷？</title>
-    <url>/2077/03/02/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%94%9F%E7%89%A9/%E6%A0%B8%E7%B3%96%EF%BC%9F%E6%A0%B8%E8%8B%B7%EF%BC%9F%E6%A0%B8%E7%B3%96%E6%A0%B8%E8%8B%B7%EF%BC%9F/</url>
-    <content><![CDATA[<p>左：脱氧核糖<br>右：核糖</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">C(C=O)[C@@H]([C@@H](CO)O)O</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">C([C@H]([C@H]([C@H](C=O)O)O)O)O</span><br></pre></td></tr></table></figure>
-<hr>
-<p><strong>核糖</strong>与<strong>碱基</strong>之间成键，形成<strong>核糖核苷</strong><br><strong>脱氧核糖</strong>与<strong>碱基</strong>之间成键，形成<strong>脱氧核糖核苷</strong></p>
-<p>两者统称为 <strong>核苷</strong></p>
-<hr>
-<p><strong>核糖核苷</strong>与<strong>磷酸基团</strong>之间成键，形成<strong>核糖核苷酸</strong><br><strong>脱氧核糖核苷</strong>与<strong>磷酸基团</strong>之间成键，形成<strong>脱氧核糖核苷酸</strong></p>
-<p>两者统称为 <strong>核苷酸</strong></p>
-<hr>
-<p>多个<strong>核糖核苷酸</strong>用化学键相连，得到<strong>核糖核酸</strong>(RNA)<br>多个<strong>脱氧核糖核苷酸</strong>用化学键相连，得到<strong>脱氧核糖核酸</strong>(DNA)</p>
-]]></content>
-      <tags>
-        <tag>文化课</tag>
-        <tag>生物</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>生物</title>
     <url>/2077/03/02/%E6%96%87%E5%8C%96%E8%AF%BE/%E7%94%9F%E7%89%A9/%E7%94%9F%E7%89%A9/</url>
     <content><![CDATA[<h2 id="必修一："><a href="#必修一：" class="headerlink" title="必修一："></a>必修一：</h2><h3 id="核糖？核苷？核糖核苷？"><a href="#核糖？核苷？核糖核苷？" class="headerlink" title="[[核糖？核苷？核糖核苷？]]"></a>[[核糖？核苷？核糖核苷？]]</h3><h2 id="选择性必修三"><a href="#选择性必修三" class="headerlink" title="选择性必修三"></a>选择性必修三</h2><h3 id="发酵工程-："><a href="#发酵工程-：" class="headerlink" title="[[发酵工程]]："></a>[[发酵工程]]：</h3><h3 id="细胞工程-："><a href="#细胞工程-：" class="headerlink" title="[[细胞工程]]："></a>[[细胞工程]]：</h3>]]></content>
       <tags>
         <tag>文化课</tag>
         <tag>生物</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>分块</title>
-    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E5%88%86%E5%9D%97/%E5%88%86%E5%9D%97/</url>
-    <content><![CDATA[<p><a href="./%E5%88%86%E5%9D%97+%E8%8E%AB%E9%98%9F.pptx">经典PPT</a></p>
-<h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><p>区间加+区间查询值域区间数的个数，可以分块 <a href="https://www.luogu.com.cn/problem/P5356">由乃打扑克</a></p>
-<p>分块也可以用来进行类似于倍增的处理，可以用来跑类似于 LCA 一类的算法 <a href="https://www.luogu.com.cn/problem/CF1491H"># Yuezheng Ling and Dynamic Tree</a></p>
-]]></content>
-      <tags>
-        <tag>算法</tag>
-        <tag>分块</tag>
       </tags>
   </entry>
   <entry>
@@ -2128,6 +2116,18 @@
       </tags>
   </entry>
   <entry>
+    <title>分块</title>
+    <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E5%88%86%E5%9D%97/%E5%88%86%E5%9D%97/</url>
+    <content><![CDATA[<p><a href="./%E5%88%86%E5%9D%97+%E8%8E%AB%E9%98%9F.pptx">经典PPT</a></p>
+<h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><p>区间加+区间查询值域区间数的个数，可以分块 <a href="https://www.luogu.com.cn/problem/P5356">由乃打扑克</a></p>
+<p>分块也可以用来进行类似于倍增的处理，可以用来跑类似于 LCA 一类的算法 <a href="https://www.luogu.com.cn/problem/CF1491H"># Yuezheng Ling and Dynamic Tree</a></p>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+        <tag>分块</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>网络流</title>
     <url>/2077/03/02/%E7%AE%97%E6%B3%95/%E7%BD%91%E7%BB%9C%E6%B5%81/%E7%BD%91%E7%BB%9C%E6%B5%81/</url>
     <content><![CDATA[<h2 id="模拟费用流-："><a href="#模拟费用流-：" class="headerlink" title="[[模拟费用流]]："></a>[[模拟费用流]]：</h2><h2 id="Trick"><a href="#Trick" class="headerlink" title="Trick"></a>Trick</h2><p>$$最大流 \Rightarrow 平面图最小割 \Rightarrow 对偶图最短路$$<br>$$二分图最小路径覆盖 \Rightarrow 最大独立集 \Rightarrow N-最大匹配$$</p>
@@ -2136,6 +2136,36 @@
       <tags>
         <tag>算法</tag>
         <tag>网络流</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>KMnO4</title>
+    <url>/2077/03/02/%E6%96%87%E5%8C%96%E8%AF%BE/%E5%8C%96%E5%AD%A6/%E6%97%A0%E6%9C%BA%E7%89%A9/KMnO4/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>文化课</tag>
+        <tag>化学</tag>
+        <tag>无机物</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>卤素单质</title>
+    <url>/2077/03/02/%E6%96%87%E5%8C%96%E8%AF%BE/%E5%8C%96%E5%AD%A6/%E6%97%A0%E6%9C%BA%E7%89%A9/%E5%8D%A4%E7%B4%A0%E5%8D%95%E8%B4%A8/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>文化课</tag>
+        <tag>化学</tag>
+        <tag>无机物</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>卤酸</title>
+    <url>/2077/03/02/%E6%96%87%E5%8C%96%E8%AF%BE/%E5%8C%96%E5%AD%A6/%E6%97%A0%E6%9C%BA%E7%89%A9/%E5%8D%A4%E9%85%B8/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>文化课</tag>
+        <tag>化学</tag>
+        <tag>无机物</tag>
       </tags>
   </entry>
   <entry>
@@ -2270,16 +2300,6 @@
       </tags>
   </entry>
   <entry>
-    <title>醇</title>
-    <url>/2077/03/02/%E6%96%87%E5%8C%96%E8%AF%BE/%E5%8C%96%E5%AD%A6/%E6%9C%89%E6%9C%BA%E7%89%A9/%E9%86%87/</url>
-    <content><![CDATA[]]></content>
-      <tags>
-        <tag>文化课</tag>
-        <tag>化学</tag>
-        <tag>有机物</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>苯</title>
     <url>/2077/03/02/%E6%96%87%E5%8C%96%E8%AF%BE/%E5%8C%96%E5%AD%A6/%E6%9C%89%E6%9C%BA%E7%89%A9/%E8%8B%AF/</url>
     <content><![CDATA[<h3 id="物理性质"><a href="#物理性质" class="headerlink" title="物理性质"></a>物理性质</h3><p>密度比水要小，易挥发</p>
@@ -2311,33 +2331,13 @@
       </tags>
   </entry>
   <entry>
-    <title>KMnO4</title>
-    <url>/2077/03/02/%E6%96%87%E5%8C%96%E8%AF%BE/%E5%8C%96%E5%AD%A6/%E6%97%A0%E6%9C%BA%E7%89%A9/KMnO4/</url>
+    <title>醇</title>
+    <url>/2077/03/02/%E6%96%87%E5%8C%96%E8%AF%BE/%E5%8C%96%E5%AD%A6/%E6%9C%89%E6%9C%BA%E7%89%A9/%E9%86%87/</url>
     <content><![CDATA[]]></content>
       <tags>
         <tag>文化课</tag>
         <tag>化学</tag>
-        <tag>无机物</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>卤素单质</title>
-    <url>/2077/03/02/%E6%96%87%E5%8C%96%E8%AF%BE/%E5%8C%96%E5%AD%A6/%E6%97%A0%E6%9C%BA%E7%89%A9/%E5%8D%A4%E7%B4%A0%E5%8D%95%E8%B4%A8/</url>
-    <content><![CDATA[]]></content>
-      <tags>
-        <tag>文化课</tag>
-        <tag>化学</tag>
-        <tag>无机物</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>卤酸</title>
-    <url>/2077/03/02/%E6%96%87%E5%8C%96%E8%AF%BE/%E5%8C%96%E5%AD%A6/%E6%97%A0%E6%9C%BA%E7%89%A9/%E5%8D%A4%E9%85%B8/</url>
-    <content><![CDATA[]]></content>
-      <tags>
-        <tag>文化课</tag>
-        <tag>化学</tag>
-        <tag>无机物</tag>
+        <tag>有机物</tag>
       </tags>
   </entry>
   <entry>
@@ -2933,22 +2933,6 @@
       </tags>
   </entry>
   <entry>
-    <title>2025.2.11</title>
-    <url>/2077/03/02/%E6%97%A5%E8%AE%B0/mygr%E7%9A%84%E6%97%A5%E8%AE%B0/2025%E5%B9%B4/2025.2.11/</url>
-    <content><![CDATA[<p>首先考虑什么情况下会出现 7</p>
-<p>发现有 8 就有 7</p>
-<p>有 9 就有 8<br>以此类推</p>
-<p>所以最终答案一定不会超过 10</p>
-<p>另外还需要考虑进位的影响</p>
-<p>当出现 $min \ge mex$ ，</p>
-]]></content>
-      <tags>
-        <tag>日记</tag>
-        <tag>mygr的日记</tag>
-        <tag>2025年</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2025.2.12</title>
     <url>/2077/03/02/%E6%97%A5%E8%AE%B0/mygr%E7%9A%84%E6%97%A5%E8%AE%B0/2025%E5%B9%B4/2025.2.12/</url>
     <content><![CDATA[<p>![[1.pdf]]</p>
@@ -2958,6 +2942,22 @@
 <p>所以考虑建图，对 $a_i,b_i$ 之间连边，对 $i,i+1$ 之间连边</p>
 <p>你发现他一定是一个二分图，所以二分图染色即可</p>
 <p>![[2.pdf]]</p>
+]]></content>
+      <tags>
+        <tag>日记</tag>
+        <tag>mygr的日记</tag>
+        <tag>2025年</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2025.2.11</title>
+    <url>/2077/03/02/%E6%97%A5%E8%AE%B0/mygr%E7%9A%84%E6%97%A5%E8%AE%B0/2025%E5%B9%B4/2025.2.11/</url>
+    <content><![CDATA[<p>首先考虑什么情况下会出现 7</p>
+<p>发现有 8 就有 7</p>
+<p>有 9 就有 8<br>以此类推</p>
+<p>所以最终答案一定不会超过 10</p>
+<p>另外还需要考虑进位的影响</p>
+<p>当出现 $min \ge mex$ ，</p>
 ]]></content>
       <tags>
         <tag>日记</tag>
@@ -3062,6 +3062,34 @@
       </tags>
   </entry>
   <entry>
+    <title>2025.2.26</title>
+    <url>/2077/03/02/%E6%97%A5%E8%AE%B0/mygr%E7%9A%84%E6%97%A5%E8%AE%B0/2025%E5%B9%B4/2025.2.26/</url>
+    <content><![CDATA[<h2 id="模拟赛"><a href="#模拟赛" class="headerlink" title="模拟赛"></a>模拟赛</h2><p><a href="http://47.92.197.167:5283/contest/601"># 比赛链接</a></p>
+<p>糖丸了</p>
+<p>第一题写了个假做法——枚举中点，对左右部分分别排序</p>
+<p>但这样并非正确，考虑 3 4 5 6 7 8 9 10 11 1 12 13 2 14 这个数据</p>
+<p>显然最优解为 3 4 5 6 7 8 9 10 11 12 13 14 2 1</p>
+<p>但是若用我们上边的那个方法，会跑出来 3 4 5 6 7 8 9 10 11 14 13 12 2 1</p>
+<p>换言之，最终选择反转的数并不一定是连续的一段，而是离散的若干个点</p>
+<p>所以考虑每个点是否转化为下降段</p>
+<p>发现它与 [[AT_awtf2024_d Almost Bubble Sort 题解|之前mx那题]] 不太一样，具体而言，对于两个转化后的点 $A,B$ ，若有 $A$ 转化后比 $B$ 更大，那么 $B$ 无论是否转化都会产生逆序对贡献</p>
+<p>换言之，所有的选择之间是独立的</p>
+<p>然后就做完了</p>
+<p>为什么会想歪呢？可能从一开始思考方向就错了，因为没注意到反例的存在</p>
+<p>最后的解法能不能独立想出来呢？我觉得未必</p>
+<p>可能思想还是不够跳跃吧，容易陷到先前一步的思考中</p>
+<p>所以一方面在想到一个结论时，不应该先入为主的认为它就正确，多思考特殊情况的存在</p>
+<p>另一方面，在这种统计贡献的题中，多从是否转换的角度分别去思考产生的贡献，以及对于其他的转换，转换与否是否统计出来的形式一致，进而推出独立性</p>
+<p>对于T2，其实还是少拿了20pts，事实上没能想到对值域进行离散化</p>
+<p>烦，省选的时候不能犯这样的问题啊</p>
+]]></content>
+      <tags>
+        <tag>日记</tag>
+        <tag>mygr的日记</tag>
+        <tag>2025年</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2025.2.27</title>
     <url>/2077/03/02/%E6%97%A5%E8%AE%B0/mygr%E7%9A%84%E6%97%A5%E8%AE%B0/2025%E5%B9%B4/2025.2.27/</url>
     <content><![CDATA[<p>考前易错清单</p>
@@ -3087,34 +3115,6 @@
 <li>概率是顺推，而期望需要逆推</li>
 <li>在2-Sat中，记得将反向关系添加上才能保证最后方案搜索的正确性</li>
 </ol>
-]]></content>
-      <tags>
-        <tag>日记</tag>
-        <tag>mygr的日记</tag>
-        <tag>2025年</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2025.2.26</title>
-    <url>/2077/03/02/%E6%97%A5%E8%AE%B0/mygr%E7%9A%84%E6%97%A5%E8%AE%B0/2025%E5%B9%B4/2025.2.26/</url>
-    <content><![CDATA[<h2 id="模拟赛"><a href="#模拟赛" class="headerlink" title="模拟赛"></a>模拟赛</h2><p><a href="http://47.92.197.167:5283/contest/601"># 比赛链接</a></p>
-<p>糖丸了</p>
-<p>第一题写了个假做法——枚举中点，对左右部分分别排序</p>
-<p>但这样并非正确，考虑 3 4 5 6 7 8 9 10 11 1 12 13 2 14 这个数据</p>
-<p>显然最优解为 3 4 5 6 7 8 9 10 11 12 13 14 2 1</p>
-<p>但是若用我们上边的那个方法，会跑出来 3 4 5 6 7 8 9 10 11 14 13 12 2 1</p>
-<p>换言之，最终选择反转的数并不一定是连续的一段，而是离散的若干个点</p>
-<p>所以考虑每个点是否转化为下降段</p>
-<p>发现它与 [[AT_awtf2024_d Almost Bubble Sort 题解|之前mx那题]] 不太一样，具体而言，对于两个转化后的点 $A,B$ ，若有 $A$ 转化后比 $B$ 更大，那么 $B$ 无论是否转化都会产生逆序对贡献</p>
-<p>换言之，所有的选择之间是独立的</p>
-<p>然后就做完了</p>
-<p>为什么会想歪呢？可能从一开始思考方向就错了，因为没注意到反例的存在</p>
-<p>最后的解法能不能独立想出来呢？我觉得未必</p>
-<p>可能思想还是不够跳跃吧，容易陷到先前一步的思考中</p>
-<p>所以一方面在想到一个结论时，不应该先入为主的认为它就正确，多思考特殊情况的存在</p>
-<p>另一方面，在这种统计贡献的题中，多从是否转换的角度分别去思考产生的贡献，以及对于其他的转换，转换与否是否统计出来的形式一致，进而推出独立性</p>
-<p>对于T2，其实还是少拿了20pts，事实上没能想到对值域进行离散化</p>
-<p>烦，省选的时候不能犯这样的问题啊</p>
 ]]></content>
       <tags>
         <tag>日记</tag>
